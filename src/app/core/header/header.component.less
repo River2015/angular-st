@@ -1,0 +1,23 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+  grid-gap: 20px;
+}
+.study-header {
+  &__logo {
+    grid-column: ~'2/5';
+  }
+
+  &__tools {
+    grid-column: ~'18/24';
+  }
+
+  &__tools-link {
+    color: grey;
+  }
+
+  &__breadcrumbs {
+    grid-column: ~'1/-1';
+  }
+
+}
