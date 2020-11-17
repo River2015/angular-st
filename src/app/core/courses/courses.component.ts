@@ -8,9 +8,12 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
 
+  courses: string[];
+
   constructor() { }
 
   ngOnInit(): void {
+    this.courses = ['course1', 'course2', 'course3'];
   }
 
 }
