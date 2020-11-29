@@ -1,12 +1,12 @@
 <div class="study-course__item">
-  <p class="study-course__title">{{course}}</p>
-  <span>duration</span>
-  <span>date</span>
+  <p class="study-course__title">{{course.title}}</p>
+  <span class="study-course__info">{{course.duration}} min</span>
+  <span class="study-course__info">{{course.creation}}</span>
 </div>
 <div class="study-course__item">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem necessitatibus quidem totam. Aut maiores nam veritatis voluptatem! Culpa inventore, officiis.</p>
+  <p class="study-course__description">{{course.description}}</p>
   <div>
-    <button>edit</button>
-    <button>delete</button>
+    <button (click)="edit()" class="btn-blue btn-small">edit</button>
+    <button (click)="delete()" class="btn-blue btn-small">delete</button>
   </div>
 </div>
