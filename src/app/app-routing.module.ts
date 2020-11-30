@@ -4,8 +4,13 @@ import {CoursesComponent} from './core/components/courses/courses.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'courses',
     component: CoursesComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'courses',
+    pathMatch: 'full',
   },
 ];
 
