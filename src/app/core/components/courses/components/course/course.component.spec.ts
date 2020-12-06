@@ -19,6 +19,15 @@ describe('CourseComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
+    const course =
+      {
+        id: 1,
+        title: 'Video course 1',
+        duration: 90,
+        creation: '12.12.2020',
+        description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when'
+      };
+    component.course = course;
     fixture.detectChanges();
   });
 
