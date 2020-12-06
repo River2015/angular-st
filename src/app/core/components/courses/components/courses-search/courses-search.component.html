@@ -1,4 +1,6 @@
-<form>
-  <input type="text" placeholder="inter text" />
-  <button type="submit">search</button>
-</form>
+<!--TODO: implement reactive forms instead of div -->
+
+<div class="courses-search__form">
+  <input type="text" placeholder="inter text" [value]="value"/>
+  <button  class="courses-search__search-btn btn-green btn-large"(click)="search()">search</button>
+</div>
