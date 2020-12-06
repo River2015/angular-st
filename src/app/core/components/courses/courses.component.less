@@ -1,4 +1,20 @@
+@import '../../../../styles/variables';
 
 .study-courses {
-  background: #f5f6fa;
+
+  display: flex;
+  flex-direction: column;
+
+  &__add-btn {
+    margin-left: auto;
+    margin-bottom: 20px;
+  }
+  &__more-btn {
+    background: @white;
+    border: 1px solid @white;
+    box-shadow: 0 1px 2px 0 rgba(29,30,38,0.10), 0 2px 10px 0 rgba(29,30,38,0.15);
+    min-height: 60px;
+    margin-bottom: 100px;
+    border-radius: 6px;
+  }
 }

@@ -1,23 +1,35 @@
+@import '../../../../styles/variables';
+
 :host {
   display: grid;
   grid-template-columns: repeat(24, minmax(0, 1fr));
-  grid-gap: 20px;
+  grid-column-gap: 20px;
+  grid-row-gap: 0;
+  color: @white;
+  grid-template-rows: 60px 60px;
+  align-items: center;
 }
 .study-header {
   &__logo {
     grid-column: ~'2/5';
+    font-size: @md-text-size;
   }
 
   &__tools {
     grid-column: ~'18/24';
+    font-size: @sm-text-size;
   }
 
   &__tools-link {
     color: grey;
   }
 
-  &__breadcrumbs {
+  &__breadcrumbs-wrapper {
     grid-column: ~'1/-1';
+    background: white;
+    margin: 0 -@indent;
+    padding: 0 @indent;
+    height: 100%;
   }
 
 }
