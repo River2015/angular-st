@@ -54,4 +54,12 @@ describe('CourseComponent', () => {
     component.edit();
     expect(editSpy).toHaveBeenCalled();
   });
+
+  it('should raise id for deleting  event when clicked (triggerEventHandler)', () => {
+    let deletedId: 1;
+    component.courseDelete.subscribe((hero: 1) => deletedId = hero);
+    const heroDe = fixture.debugElement.query(By.css('button.study-courses__delete-btn'));
+    heroDe.triggerEventHandler('click', null);
+    expect(deletedId).toBe(1);
+  });
 });
