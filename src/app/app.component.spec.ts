@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from './core/components/header/header.component';
 import {FooterComponent} from './core/components/footer/footer.component';
 import {CoursesComponent} from './core/components/courses/courses.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent, HeaderComponent, FooterComponent, CoursesComponent
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

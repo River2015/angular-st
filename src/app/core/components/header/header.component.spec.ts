@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import {ProfileComponent} from '../profile/profile.component';
 import {BreadcrumbsComponent} from '../breadcrumbs/breadcrumbs.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -10,7 +11,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent, ProfileComponent, BreadcrumbsComponent ]
+      declarations: [ HeaderComponent, ProfileComponent, BreadcrumbsComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   });
