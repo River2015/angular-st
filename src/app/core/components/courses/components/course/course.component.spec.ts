@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseComponent } from './course.component';
 import {By} from '@angular/platform-browser';
 
-describe('CourseComponent', () => {
+describe('CourseComponent as TestBed', () => {
   let component: CourseComponent;
   let fixture: ComponentFixture<CourseComponent>;
 
@@ -61,3 +61,39 @@ describe('CourseComponent', () => {
     expect(deletedId).toBe(1);
   });
 });
+
+describe('CourseComponent as class', () => {
+  let component: CourseComponent;
+
+  beforeEach( () => {
+    component = new CourseComponent();
+    const course =
+        {
+          id: 1,
+          title: 'Video course 1',
+          duration: 90,
+          creation: '12.12.2020',
+          description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when'
+        };
+    component.course = course;
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should log message on edit', () => {
+    spyOn(console, 'log');
+    component.edit();
+    expect(console.log).toHaveBeenCalled();
+  });
+
+  it('should raise id for deleting  event when clicked', () => {
+    let deletedId: 1;
+    component.courseDelete.subscribe((hero: 1) => deletedId = hero);
+    component.delete();
+  });
+});
+
+
+
