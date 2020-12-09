@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseComponent } from './course.component';
 import {By} from '@angular/platform-browser';
+import {CoursesComponent} from '../../courses.component';
 
 describe('CourseComponent as TestBed', () => {
   let component: CourseComponent;
@@ -55,9 +56,9 @@ describe('CourseComponent as TestBed', () => {
 
   it('should raise id for deleting  event when clicked (triggerEventHandler)', () => {
     let deletedId: 1;
-    component.courseDelete.subscribe((hero: 1) => deletedId = hero);
-    const heroDe = fixture.debugElement.query(By.css('button.study-courses__delete-btn'));
-    heroDe.triggerEventHandler('click', null);
+    component.courseDelete.subscribe((id: 1) => deletedId = id);
+    const courseDe = fixture.debugElement.query(By.css('button.study-courses__delete-btn'));
+    courseDe.triggerEventHandler('click', null);
     expect(deletedId).toBe(1);
   });
 });
@@ -90,8 +91,25 @@ describe('CourseComponent as class', () => {
 
   it('should raise id for deleting  event when clicked', () => {
     let deletedId: 1;
-    component.courseDelete.subscribe((hero: 1) => deletedId = hero);
+    component.courseDelete.subscribe((id: 1) => deletedId = id);
     component.delete();
+  });
+});
+describe('CourseComponent with host', () => {
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CourseComponent, CoursesComponent ],
+    });
+  });
+
+  it('should raise delete id event when clicked', () => {
+    const fixture = TestBed.createComponent(CoursesComponent);​
+    const testHost = fixture.componentInstance;​
+    const testEl = fixture.debugElement.query(By.css('.study-course'));
+    const deletedId = 1;
+    testEl.triggerEventHandler('click', null);​
+    expect(testHost.delete).toBe(testHost.courses.filter((course, ind) => ind !== deletedId));
   });
 });
 
