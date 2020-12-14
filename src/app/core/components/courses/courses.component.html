@@ -1,9 +1,20 @@
 <div class="study-courses">
-  <study-courses-search></study-courses-search>
+  <study-courses-search [courses]="courses"></study-courses-search>
   <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
-  <div>
-    <study-course class="study-course" (courseDelete)="delete($event)" *ngFor="let course of courses" [course]="course"></study-course>
+  <div *ngIf="courses; else wellcomeAddMessage">
+    <study-course
+      class="study-course"
+      [ngClass]="{ 'study-courses--rated': course.topRated === true}"
+      (courseDelete)="delete($event)"
+      *ngFor="let course of courses | filter: 'topRated' | orderBy:'duration'"
+      [course]="course"
+      appCourseBorder [creation]="course.duration"
+    ></study-course>
+    <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
   </div>
-  <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
 </div>
+
+<ng-template #wellcomeAddMessage>
+  <div class="study-courses__message">no data, feel free to add new course</div>
+</ng-template>
 
