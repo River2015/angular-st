@@ -68,31 +68,31 @@ describe('CourseComponent as TestBed', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create as TestBed', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit edit, action once clicked', () => {
+  it('should emit edit, action once clicked as TestBed', () => {
     const spy = spyOn(component, 'edit');
     fixture.debugElement.query(By.css('button.study-courses__edit-btn')).triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should emit delete action once clicked', () => {
+  it('should emit delete action once clicked as TestBed', () => {
     const spy = spyOn(component, 'delete');
     fixture.debugElement.query(By.css('button.study-courses__delete-btn')).triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should log message on edit', () => {
+  it('should log message on edit as TestBed', () => {
     const editSpy = spyOn(console, 'log');
     component.edit();
     expect(editSpy).toHaveBeenCalled();
   });
 
-  it('should raise id for deleting  event when clicked (triggerEventHandler)', () => {
+  it('should raise id for deleting  event when clicked (triggerEventHandler) as TestBed', () => {
     let deletedId: 1;
     component.courseDelete.subscribe((id: 1) => deletedId = id);
     const courseDe = fixture.debugElement.query(By.css('button.study-courses__delete-btn'));
@@ -117,19 +117,19 @@ describe('CourseComponent as class', () => {
     component.course = course;
   });
 
-  it('should create', () => {
+  it('should create class', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should log message on edit', () => {
+  it('should log message on edit in class', () => {
     spyOn(console, 'log');
     component.edit();
     expect(console.log).toHaveBeenCalled();
   });
 
-  it('should raise id for deleting  event when clicked', () => {
-    let deletedId: 1;
-    component.courseDelete.subscribe((id: 1) => deletedId = id);
+  it('should raise id for deleting  event when clicked in class', () => {
+    component.courseDelete.subscribe((deletedId: 1) => expect(deletedId).toBe(1));
+    // comp.selected.subscribe((deletedItem: 1) => expect(deletedItem).toBe(1));
     component.delete();
   });
 });
@@ -146,11 +146,11 @@ describe('CourseComponent with host', () => {
     testEl = fixture.debugElement.query(By.css('study-course'));
   });
 
-  it('should raise delete id event when clicked', () => {
+  it('should raise delete id event when clicked with host', () => {
     expect(testEl).toBeTruthy();
   });
 
-  it('should raise delete id event when clicked', () => {
+  it('should raise delete id event when clicked with host', () => {
     const deletedId = 1;
     testEl.triggerEventHandler('click', null);​
     expect(testHost.delete).toBe(testHost.courses.filter((course, ind) => ind !== deletedId));
