@@ -1,12 +1,12 @@
-<div class="study-courses">
-  <study-courses-search [courses]="courses"></study-courses-search>
+<div class="study-courses" >
+  <study-courses-search (searchPass)="search($event)"></study-courses-search>
   <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
   <div *ngIf="courses; else wellcomeAddMessage">
     <study-course
       class="study-course"
       [ngClass]="{ 'study-courses--rated': course.topRated === true}"
       (courseDelete)="delete($event)"
-      *ngFor="let course of courses | filter: 'topRated' | orderBy:'duration'"
+      *ngFor="let course of courses | filter: 'topRated' : true | orderBy:'duration'"
       [course]="course"
       appCourseBorder [creation]="course.duration"
     ></study-course>

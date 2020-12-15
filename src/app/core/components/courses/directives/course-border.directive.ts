@@ -13,7 +13,6 @@ export class CourseBorderDirective implements OnInit {
 
   }
   ngOnInit(): void {
-    console.log(this.creation);
     if (this.creation >= this.currentDuration) {
       this.element.nativeElement.style.border = '1px solid green';
     } else {

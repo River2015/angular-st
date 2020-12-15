@@ -12,6 +12,7 @@ import {DurationPipe} from './components/courses/pipes/duration.pipe';
 import {OrderByPipe} from './components/courses/pipes/order-by.pipe';
 import {FilterPipe} from './components/courses/pipes/filter.pipe';
 import {FormsModule} from '@angular/forms';
+import {SearchPipe} from './components/courses/pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {FormsModule} from '@angular/forms';
     CourseBorderDirective,
     DurationPipe,
     OrderByPipe,
-    FilterPipe
+    FilterPipe,
+    SearchPipe
   ],
   exports: [
     HeaderComponent,
@@ -37,5 +39,6 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [ SearchPipe ]
 })
 export class CoreModule { }
