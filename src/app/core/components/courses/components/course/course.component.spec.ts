@@ -3,42 +3,29 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseComponent } from './course.component';
 import {By} from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import {ICourse} from '../../../../models/course';
 
 @Component({
   template:
       `<study-course
-    class="study-course"
-    (courseDelete)="delete($event)"
-    *ngFor="let course of courses"
-    [course]="course"
-  ></study-course>`
+          (courseDelete)="delete($event)"
+          [course]="course"
+        ></study-course>`
 })
+
 class TestHostComponent {
-  courses = [
-    {
+  course: ICourse = {
       id: 1,
       title: 'Video course 1',
       duration: 90,
       creation: '12.12.2020',
       description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when'
-    },
-    {
-      id: 2,
-      title: 'Video course 2',
-      duration: 120,
-      creation: '14.12.2020',
-      description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when'
-    },
-    {
-      id: 3,
-      title: 'Video course 3',
-      duration: 60,
-      creation: '10.12.2020',
-      description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when'
-    }
-  ];
-  delete(id: number): void {
-    this.courses = this.courses.filter((course) => course.id !== id);
+    };
+
+  deletedCourseId: number;
+
+  delete(deletedCourseId: number): void {
+    deletedCourseId = deletedCourseId;
   }
 }
 
@@ -137,24 +124,28 @@ describe('CourseComponent as class', () => {
 describe('CourseComponent with host', () => {
   let testHost;
   let testEl;
+  let testDe;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ CourseComponent, TestHostComponent ],
     });
     const fixture = TestBed.createComponent(TestHostComponent);​
     testHost = fixture.componentInstance;​
-    testEl = fixture.debugElement.query(By.css('study-course'));
+    testEl = fixture.nativeElement.querySelector('study-course');
+    testDe = fixture.debugElement.query(By.css('button.study-courses__delete-btn'));
+    fixture.detectChanges();
   });
 
-  it('should create with host', () => {
-    expect(testHost).toBeDefined();
+  it('should create p with host', () => {
+    const title = testEl.querySelector('p');
+    const content = testHost.course.title;
+    expect(title.textContent).toContain(content);
   });
 
-  // it('should raise delete id event when clicked with host', () => {
-  //   const deletedId = 1;
-  //   testEl.triggerEventHandler('click', null);​
-  //   expect(testHost.delete).toMatch(testHost.courses.filter((course, ind) => ind !== deletedId));
-  // });
+  it('should raise delete id event when clicked with host', () => {
+    testDe.triggerEventHandler('click', null);
+    expect(testHost.deletedCourseId).toBe(testHost.course.id);
+  });
 });
 
 
