@@ -6,6 +6,7 @@ import {COURSES} from '../mocks';
   providedIn: 'root'
 })
 export class CoursesService {
+  courses: Array<ICourse> = COURSES;
 
   constructor() { }
 
@@ -14,6 +15,35 @@ export class CoursesService {
   }
 
   addCourse(course: ICourse): Array<ICourse> {
-    return [...COURSES, course];
+    return [...this.courses, course];
   }
+
+  getCourseId(id: number): ICourse[] {
+    return this.courses.filter((course) => course.id === id);
+  }
+
+  updateCourse(
+    id: number,
+    title: string,
+    creation: string,
+    duration: number,
+    description: string): ICourse[] {
+      return this.courses.filter((course) => {
+        if (course.id === id) {
+          const updatedCourse = {
+            id,
+            title,
+            creation,
+            duration,
+            description
+          };
+          return { ...course, ...updatedCourse};
+        }
+      }
+    );
+  };
+
+  removeCourse(id: number): ICourse[] {
+    return this.courses.filter((course) => course.id !== id);
+  };
 }

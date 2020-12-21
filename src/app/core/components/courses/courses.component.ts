@@ -25,8 +25,7 @@ export class CoursesComponent implements OnInit, OnChanges {
   }
 
   delete(id: number): void {
-    console.log(id);
-    this.courses = this.courses.filter((course: ICourse) => course.id !== id);
+    this.courses = this.coursesService.removeCourse(id);
   }
 
   add(): void {
