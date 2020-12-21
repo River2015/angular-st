@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesComponent } from './courses.component';
+import {CourseComponent} from './components/course/course.component';
+import {CoursesSearchComponent} from './components/courses-search/courses-search.component';
+import {By} from '@angular/platform-browser';
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -8,7 +11,7 @@ describe('CoursesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CoursesComponent ]
+      declarations: [ CoursesComponent, CourseComponent, CoursesSearchComponent ],
     })
     .compileComponents();
   });
@@ -21,5 +24,31 @@ describe('CoursesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit add, action once clicked', () => {
+    const spyAdd = spyOn(component, 'add');
+    fixture.debugElement.query(By.css('button.study-courses__add-btn')).triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(spyAdd).toHaveBeenCalled();
+  });
+
+  it('should emit loadMore action once clicked', () => {
+    const spyLoadMore = spyOn(component, 'loadMore');
+    fixture.debugElement.query(By.css('button.study-courses__more-btn')).triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(spyLoadMore).toHaveBeenCalled();
+  });
+
+  it('should log message on loadMore', () => {
+    const loadMoreSpy = spyOn(console, 'log');
+    component.loadMore();
+    expect(loadMoreSpy).toHaveBeenCalled();
+  });
+
+  it('should log message on add', () => {
+    const addSpy = spyOn(console, 'log');
+    component.add();
+    expect(addSpy).toHaveBeenCalled();
   });
 });

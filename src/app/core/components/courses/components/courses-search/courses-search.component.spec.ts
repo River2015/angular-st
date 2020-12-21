@@ -8,7 +8,7 @@ describe('CoursesSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CoursesSearchComponent ]
+      declarations: [ CoursesSearchComponent ],
     })
     .compileComponents();
   });

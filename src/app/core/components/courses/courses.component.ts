@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnChanges, OnInit, SimpleChanges,} from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {ICourse} from '../../models/course';
 
 @Component({
@@ -6,7 +6,7 @@ import {ICourse} from '../../models/course';
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.less']
 })
-export class CoursesComponent implements OnInit, OnChanges {
+export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
 
   courses: Array<ICourse>;
@@ -45,15 +45,11 @@ export class CoursesComponent implements OnInit, OnChanges {
   }
 
   delete(id: number): void {
-    console.log(id);
     this.courses = this.courses.filter((course: ICourse) => course.id !== id);
   }
 
   add(): void {
-    this.courses = [];
+    console.log(' courses loaded');
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('onChanges', changes);
-  }
 }
