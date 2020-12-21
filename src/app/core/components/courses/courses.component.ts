@@ -1,6 +1,7 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {ICourse} from '../../models/course';
-import {SearchPipe} from './pipes/search.pipe';
+import {SearchPipe} from '../../pipes/search.pipe';
+import {COURSES} from '../../mocks';
 
 @Component({
   selector: 'study-courses',
@@ -9,32 +10,7 @@ import {SearchPipe} from './pipes/search.pipe';
 })
 export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
-  courses: Array<ICourse> = [
-    {
-      id: 1,
-      title: '1 Video course',
-      duration: 90,
-      creation: '12.11.2020',
-      description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when',
-      topRated: true
-    },
-    {
-      id: 2,
-      title: '2 course',
-      duration: 120,
-      creation: '12.12.2020',
-      description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when',
-      topRated: false
-    },
-    {
-      id: 3,
-      title: '3 Video',
-      duration: 50,
-      creation: '10.12.2020',
-      description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when',
-      topRated: true
-    }
-  ];
+  courses: Array<ICourse> = COURSES;
 
   constructor(private searchPipe: SearchPipe) {
   }
@@ -51,7 +27,10 @@ export class CoursesComponent implements OnInit {
     this.courses = this.courses.filter((course: ICourse) => course.id !== id);
   }
 
-  search(searchText: string): void {
+  search(searchText: string): any {
+    if (!searchText) {
+      this.courses = COURSES;               // there is filtering pipe in template
+    }
     this.courses = this.searchPipe.transform( this.courses, searchText);
   }
 

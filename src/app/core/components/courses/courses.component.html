@@ -8,7 +8,7 @@
       (courseDelete)="delete($event)"
       *ngFor="let course of courses | filter: 'topRated' : true | orderBy:'duration'"
       [course]="course"
-      appCourseBorder [creation]="course.duration"
+      appCourseBorder [creation]="course.creation"
     ></study-course>
     <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
   </div>
