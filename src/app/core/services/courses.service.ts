@@ -41,9 +41,9 @@ export class CoursesService {
         }
       }
     );
-  };
+  }
 
   removeCourse(id: number): ICourse[] {
     return this.courses.filter((course) => course.id !== id);
-  };
+  }
 }

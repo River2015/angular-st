@@ -2,7 +2,7 @@
   <study-courses-search></study-courses-search>
   <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
   <div>
-    <study-course (courseDelete)="delete($event)" *ngFor="let course of courses" [course]="course"></study-course>
+    <study-course class="study-course" (courseDelete)="delete($event)" *ngFor="let course of courses" [course]="course"></study-course>
   </div>
   <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
 </div>
