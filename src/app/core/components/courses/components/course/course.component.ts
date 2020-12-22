@@ -34,3 +34,4 @@ export class CourseComponent implements OnInit {
     this.courseDelete.emit(this.course.id);
   }
 }
+
