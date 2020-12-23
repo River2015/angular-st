@@ -25,7 +25,10 @@ export class CoursesComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.courses = this.coursesService.removeCourse(id);
+    const isConfirm = confirm('Are you sure to delete item?');
+    if (isConfirm){
+      this.courses = this.coursesService.removeCourse(id);
+    } else { return; }
   }
 
   add(): void {
