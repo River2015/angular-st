@@ -11,7 +11,7 @@ export class CoursesService {
   constructor() { }
 
   getCourses(): Array<ICourse>{
-    return COURSES;
+    return this.courses;
   }
 
   addCourse(course: ICourse): Array<ICourse> {
@@ -44,6 +44,7 @@ export class CoursesService {
   }
 
   removeCourse(id: number): ICourse[] {
-    return this.courses.filter((course) => course.id !== id);
+    this.courses = this.courses.filter((course) => course.id !== id);
+    return this.courses;
   }
 }
