@@ -1,10 +1,14 @@
 <header class="app-header">
   <study-header></study-header>
 </header>
-<main class="app-main-content">
+<main *ngIf="isAuth; else authTmp" class="app-main-content">
   <study-courses></study-courses>
   <!--<router-outlet></router-outlet>-->
 </main>
 <footer class="app-footer">
   <study-footer></study-footer>
 </footer>
+
+<ng-template #authTmp>
+  <study-login></study-login>
+</ng-template>

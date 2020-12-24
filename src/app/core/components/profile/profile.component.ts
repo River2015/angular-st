@@ -1,4 +1,5 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'study-profile',
@@ -7,9 +8,11 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   @HostBinding('class')class = 'study-profile';
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
-
+  login(): any{
+    console.log(this.authService.getUser());
+  }
 }

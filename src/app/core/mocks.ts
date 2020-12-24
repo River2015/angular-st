@@ -1,4 +1,5 @@
 import {ICourse} from './models/course';
+import {IUser} from './models/user';
 
 export const COURSES: Array<ICourse> = [
   {
@@ -23,3 +24,9 @@ export const COURSES: Array<ICourse> = [
     description: 'A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views. The lifecycle continues with change detection, as Angular checks to see when'
   }
 ];
+
+export const USER: IUser = {
+  id: 1,
+  name: 'Ivan',
+  surname: 'Ivanov',
+};
