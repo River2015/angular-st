@@ -7,6 +7,12 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
 import {CoursesSearchComponent} from './components/courses/components/courses-search/courses-search.component';
 import {CourseComponent} from './components/courses/components/course/course.component';
+import {CourseBorderDirective} from './directives/course-border.directive';
+import {DurationPipe} from './pipes/duration.pipe';
+import {OrderByPipe} from './pipes/order-by.pipe';
+import {FilterPipe} from './pipes/filter.pipe';
+import {FormsModule} from '@angular/forms';
+import {SearchPipe} from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +23,11 @@ import {CourseComponent} from './components/courses/components/course/course.com
     BreadcrumbsComponent,
     CoursesSearchComponent,
     CourseComponent,
+    CourseBorderDirective,
+    DurationPipe,
+    OrderByPipe,
+    FilterPipe,
+    SearchPipe
   ],
   exports: [
     HeaderComponent,
@@ -24,7 +35,9 @@ import {CourseComponent} from './components/courses/components/course/course.com
     FooterComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule
+  ],
+  providers: [ SearchPipe ]
 })
 export class CoreModule { }

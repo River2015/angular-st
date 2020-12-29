@@ -14,11 +14,14 @@
   &__item {
     display: flex;
   }
+
   &__title {
     flex: 1;
     color: @black;
     font-size: @lg-text-size;
     font-weight: @font-weight-semi;
+    display: flex;
+    align-items: center;
   }
   
   &__info {
@@ -28,5 +31,10 @@
 
   &__description {
     color: @grey;
+  }
+
+  &__img {
+    width: 40px;
+    height: 40px;
   }
 }
