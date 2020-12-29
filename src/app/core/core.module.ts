@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -38,7 +38,6 @@ import {SearchPipe} from './pipes/search.pipe';
     CommonModule,
     FormsModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ SearchPipe ]
 })
 export class CoreModule { }
