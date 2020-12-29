@@ -1,6 +1,6 @@
 <!--TODO: implement reactive forms instead of div -->
 
 <div class="courses-search__form">
-  <input type="text" placeholder="inter text" [value]="value"/>
+  <input type="text" [(ngModel)]="searchText"  placeholder="inter text"/>
   <button  class="courses-search__search-btn btn-green btn-large"(click)="search()">search</button>
 </div>
