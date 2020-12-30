@@ -5,19 +5,17 @@ import {AppComponent} from './app.component';
 import {AddCourseComponent} from './core/components/add-course/add-course.component';
 
 const routes: Routes = [
+
+  { path: '', redirectTo: 'courses', pathMatch: 'full' },
+
   {
-    path: '',
-    component:  CoursesComponent,
-    children: [
-      {
-        path: 'courses',
-        component: CoursesComponent,
-      },
-      {
-        path: 'add',
-        component: AddCourseComponent,
-      }
-    ]
+    path: 'courses',
+    component: CoursesComponent,
+  },
+
+  {
+    path: 'add',
+    component: AddCourseComponent,
   },
 ];
 
