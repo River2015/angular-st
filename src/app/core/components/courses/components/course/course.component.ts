@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {ICourse} from '../../../../models/course';
 
+
 @Component({
   selector: 'study-course',
   templateUrl: './course.component.html',
@@ -33,3 +34,4 @@ export class CourseComponent implements OnInit {
     this.courseDelete.emit(this.course.id);
   }
 }
+

@@ -2,6 +2,7 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 import {ICourse} from '../../models/course';
 import {SearchPipe} from '../../pipes/search.pipe';
 import {COURSES} from '../../mocks';
+import {CoursesService} from '../../services/courses.service';
 
 @Component({
   selector: 'study-courses',
@@ -12,11 +13,11 @@ export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
   courses: Array<ICourse> = COURSES;
 
-  constructor(private searchPipe: SearchPipe) {
+  constructor(private searchPipe: SearchPipe, private coursesService: CoursesService) {
   }
 
   ngOnInit(): void {
-
+    this.courses = this.coursesService.getCourses();
   }
 
   loadMore(): void {
@@ -24,7 +25,10 @@ export class CoursesComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.courses = this.courses.filter((course: ICourse) => course.id !== id);
+    const isConfirm = confirm('Are you sure to delete item?');
+    if (isConfirm){
+      this.courses = this.coursesService.removeCourse(id);
+    } else { return; }
   }
 
   search(searchText: string): any {
@@ -35,7 +39,7 @@ export class CoursesComponent implements OnInit {
   }
 
   add(): void {
-    console.log(' courses loaded');
+    this.courses = [];
   }
 
 }

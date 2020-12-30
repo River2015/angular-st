@@ -1,13 +1,13 @@
 <div class="study-header__logo">
 VIDEO COURSE
 </div>
-<div class="study-header__tools">
+<div *ngIf="isAuth" class="study-header__tools">
   <study-profile></study-profile>
-  <button class="header__tools-link">
+  <button class="header__tools-link" (click)='logout()'>
     <img class="header__tools-img" src="../../../../assets/icons/notifications.svg" />
     log out
   </button>
 </div>
 <div class="study-header__breadcrumbs-wrapper">
-  <study-breadcrumbs></study-breadcrumbs>
+  <study-breadcrumbs *ngIf="isAuth"></study-breadcrumbs>
 </div>

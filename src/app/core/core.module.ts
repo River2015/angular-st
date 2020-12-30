@@ -13,6 +13,7 @@ import {OrderByPipe} from './pipes/order-by.pipe';
 import {FilterPipe} from './pipes/filter.pipe';
 import {FormsModule} from '@angular/forms';
 import {SearchPipe} from './pipes/search.pipe';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,14 @@ import {SearchPipe} from './pipes/search.pipe';
     DurationPipe,
     OrderByPipe,
     FilterPipe,
-    SearchPipe
+    SearchPipe,
+    LoginComponent,
   ],
   exports: [
     HeaderComponent,
     CoursesComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,

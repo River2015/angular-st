@@ -1,4 +1,5 @@
 import {ICourse} from './models/course';
+import {IUser} from './models/user';
 
 export const COURSES: Array<ICourse> = [
   {
@@ -42,3 +43,9 @@ export const COURSES: Array<ICourse> = [
     topRated: true
   }
 ];
+
+export const USER: IUser = {
+  id: 1,
+  name: 'Ivan',
+  surname: 'Ivanov',
+};
