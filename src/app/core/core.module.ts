@@ -14,6 +14,7 @@ import {FilterPipe} from './pipes/filter.pipe';
 import {FormsModule} from '@angular/forms';
 import {SearchPipe} from './pipes/search.pipe';
 import { LoginComponent } from './components/login/login.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LoginComponent } from './components/login/login.component';
     FilterPipe,
     SearchPipe,
     LoginComponent,
+    AddCourseComponent,
   ],
   exports: [
     HeaderComponent,

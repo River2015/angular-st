@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from '@angular/core';
 import {ICourse} from '../../models/course';
 import {SearchPipe} from '../../pipes/search.pipe';
 import {COURSES} from '../../mocks';
@@ -7,7 +7,8 @@ import {CoursesService} from '../../services/courses.service';
 @Component({
   selector: 'study-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.less']
+  styleUrls: ['./courses.component.less'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
