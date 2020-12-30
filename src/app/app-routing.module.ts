@@ -7,7 +7,7 @@ import {AddCourseComponent} from './core/components/add-course/add-course.compon
 const routes: Routes = [
   {
     path: '',
-    component:  AddCourseComponent,
+    component:  CoursesComponent,
     children: [
       {
         path: 'courses',
