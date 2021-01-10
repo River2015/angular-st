@@ -1,0 +1,29 @@
+<div *ngFor="let course of courses" class="study-course__form">
+  <h1  class="study-course__title">{{course.title}}</h1>
+  <div class="study-course__item">
+    <label>Title<span>is required</span></label>
+    <input type="text" [value]="course.title"/>
+  </div>
+  <div class="study-course__item">
+    <label>Description <span>is required</span></label>
+    <textarea [value]="course.description"></textarea>
+  </div>
+  <div class="study-course__item study-course__item--w250" >
+    <label>Duration<span>is required</span></label>
+    <input type="text" [value]="course.duration" />
+  </div>
+
+  <div class="study-course__item study-course__item--w250">
+    <label>Date<span>is required</span></label>
+    <input type="text" [value]="course.creation" />
+  </div>
+  <div class="study-course__item study-course__item--w400">
+    <label>Author<span>is required</span></label>
+    <input type="text" [value]="course.author"/>
+  </div>
+  <div class="study-course__controls">
+    <button (click)="cancel()" class="btn-grey btn-large study-courses__edit-btn">cancel</button>
+    <button (click)="save()" class="btn-green btn-large study-courses__delete-btn">save</button>
+  </div>
+</div>
+
