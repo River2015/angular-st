@@ -7,7 +7,7 @@ import {CoursesService} from '../../services/courses.service';
 @Component({
   selector: 'study-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.less']
+  styleUrls: ['./courses.component.less'],
 })
 export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';

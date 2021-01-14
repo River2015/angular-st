@@ -1,0 +1,71 @@
+@import '../../../../styles/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  background: @white;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  box-shadow: 0 1px 2px 0 rgba(29,30,38,0.10), 0 2px 10px 0 rgba(29,30,38,0.15);
+  padding: 24px;
+  input {
+    border: 2px solid #9b9b9b;
+    height: 60px;
+    border-radius: 4px;
+  }
+}
+.study-course {
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    label {
+      font-size: 20px;
+      display: flex;
+    }
+
+    span {
+      margin-left: auto;
+    }
+
+    input {
+      font-size: 20px;
+      width: 100%;
+      min-height: 40px;
+    }
+  }
+
+  &__item--w250 {
+    width: 250px;
+  }
+
+  &__item--w400 {
+    width: 400px;
+  }
+
+  &__title {
+    flex: 1;
+    color: @black;
+    font-size: @lg-text-size;
+    font-weight: @font-weight-semi;
+    display: flex;
+    align-items: center;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin-left: 20px;
+    }
+  }
+
+  &__duration {
+    position: absolute;
+    left: 450px;
+    font-size: @lg-text-size;
+    font-weight: @font-weight-semi;
+  }
+}

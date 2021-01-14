@@ -1,18 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnInit, Output,} from '@angular/core';
 import {ICourse} from '../../../../models/course';
 
 
 @Component({
   selector: 'study-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.less']
+  styleUrls: ['./course.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseComponent implements OnInit {
   @HostBinding('class')class = 'study-course';
