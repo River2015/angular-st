@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'study-add-course',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AddCourseComponent implements OnInit {
   value = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -16,11 +17,11 @@ export class AddCourseComponent implements OnInit {
     this.value = value;
   }
   cancel(): void {
-    console.log('cancel');
+    this.router.navigateByUrl('/courses');
   }
 
   save(): void {
-    console.log('save');
+    this.router.navigateByUrl('/courses');
   }
 
   number(val): number {

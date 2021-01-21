@@ -3,6 +3,7 @@ import {ICourse} from '../../models/course';
 import {SearchPipe} from '../../pipes/search.pipe';
 import {COURSES} from '../../mocks';
 import {CoursesService} from '../../services/courses.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'study-courses',
@@ -13,7 +14,7 @@ export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
   courses: Array<ICourse> = COURSES;
 
-  constructor(private searchPipe: SearchPipe, private coursesService: CoursesService) {
+  constructor(private searchPipe: SearchPipe, private coursesService: CoursesService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,7 +40,7 @@ export class CoursesComponent implements OnInit {
   }
 
   add(): void {
-    this.courses = [];
+    this.router.navigateByUrl('courses/add');
   }
 
 }

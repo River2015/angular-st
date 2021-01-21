@@ -15,6 +15,9 @@ import {FormsModule} from '@angular/forms';
 import {SearchPipe} from './pipes/search.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { EditCourseComponent } from './components/edit-course/edit-course.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { AddCourseComponent } from './components/add-course/add-course.component
     SearchPipe,
     LoginComponent,
     AddCourseComponent,
+    NotFoundComponent,
+    EditCourseComponent,
   ],
   exports: [
     HeaderComponent,
@@ -41,7 +46,8 @@ import { AddCourseComponent } from './components/add-course/add-course.component
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   providers: [ SearchPipe ]
 })
