@@ -1,14 +1,14 @@
 <div class="study-course__item">
   <p class="study-course__title">
-    {{course.title | uppercase}}
+    {{course.name | uppercase}}
     <img
-      *ngIf="course.topRated === true"
+      *ngIf="course.isTopRated === true"
       class="study-course__img"
       src="../../../../../../assets/icons/star.svg"
     />
   </p>
-  <span class="study-course__info">{{course.duration | duration}}</span>
-  <span class="study-course__info">{{course.creation | date}}</span>
+  <span class="study-course__info">{{course.length | duration}}</span>
+  <span class="study-course__info">{{course.date | date}}</span>
 </div>
 <div class="study-course__item">
   <p class="study-course__description">{{course.description}}</p>

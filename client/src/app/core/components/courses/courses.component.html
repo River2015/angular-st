@@ -1,15 +1,15 @@
 <router-outlet></router-outlet>
 <div class="study-courses" >
-  <study-courses-search (searchPass)="search($event)"></study-courses-search>
+<!--  <study-courses-search (searchPass)="search($event)"></study-courses-search>-->
   <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
   <div *ngIf="courses; else wellcomeAddMessage">
     <study-course
       class="study-course"
-      [ngClass]="{ 'study-courses--rated': course.topRated === true}"
+      [ngClass]="{ 'study-courses--rated': course.isTopRated === true}"
       (courseDelete)="delete($event)"
-      *ngFor="let course of courses | filter: 'topRated' : true | orderBy:'duration'"
+      *ngFor="let course of courses | async | filter: 'isTopRated' : true | orderBy:'duration'"
       [course]="course"
-      appCourseBorder [creation]="course.creation"
+      appCourseBorder [creation]="course.date"
     ></study-course>
     <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
   </div>

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): any {
-    console.log(this.authService.getUser().name);
+    console.log(this.authService.getUser());
     this.authService.logoutUser();
     this.router.navigateByUrl('/login');
   }

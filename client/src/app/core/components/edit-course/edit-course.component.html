@@ -1,8 +1,8 @@
 <div *ngFor="let course of courses" class="study-course__form">
-  <h1  class="study-course__title">{{course.title}}</h1>
+  <h1  class="study-course__title">{{course.name}}</h1>
   <div class="study-course__item">
     <label>Title<span>is required</span></label>
-    <input type="text" [value]="course.title"/>
+    <input type="text" [value]="course.name"/>
   </div>
   <div class="study-course__item">
     <label>Description <span>is required</span></label>
@@ -10,12 +10,12 @@
   </div>
   <div class="study-course__item study-course__item--w250" >
     <label>Duration<span>is required</span></label>
-    <input type="text" [value]="course.duration" />
+    <input type="text" [value]="course.length" />
   </div>
 
   <div class="study-course__item study-course__item--w250">
     <label>Date<span>is required</span></label>
-    <input type="text" [value]="course.creation" />
+    <input type="text" [value]="course.date" />
   </div>
   <div class="study-course__item study-course__item--w400">
     <label>Author<span>is required</span></label>

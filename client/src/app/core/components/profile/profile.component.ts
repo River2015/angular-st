@@ -8,9 +8,20 @@ import {AuthService} from '../../services/auth.service';
 })
 export class ProfileComponent implements OnInit {
   @HostBinding('class')class = 'study-profile';
+  data;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    const token = this.authService.getUser();
+    this.authService.getUserProfile(token).subscribe(
+      data => {
+        console.log(data);
+        this.data = data;
+      },
+      err => {
+        console.log(err.error.message);
+      }
+    );
   }
   login(): any{
     console.log(this.authService.getUser());

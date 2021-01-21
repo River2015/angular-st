@@ -1,26 +1,52 @@
 import { Injectable } from '@angular/core';
 import {ICourse} from '../models/course';
 import {COURSES} from '../mocks';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {Router} from '@angular/router';
+import {catchError, map} from 'rxjs/operators';
+import {ErrorService} from './error.service';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  courses: Array<ICourse> = COURSES;
+  courses: any = [];
+  endpoint = 'http://localhost:3004/courses/';
+  constructor(private http: HttpClient, private router: Router, private handleError: ErrorService) { }
 
-  constructor() { }
+  getCourses(): Observable<any>{
+    const api = `${this.endpoint}`;
+    return this.http.get(api, httpOptions).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+     // catchError(this.handleError);
+    );
+  }
 
-  getCourses(): Array<ICourse>{
-    return this.courses;
+  getCoursesId(id: string): Observable<any>{
+    const api = `${this.endpoint}/${id}`
+    return this.http.get(api, httpOptions).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      // catchError(this.handleError);
+    );
   }
 
   addCourse(course: ICourse): Array<ICourse> {
     return [...this.courses, course];
   }
 
-  getCourseId(id: number): ICourse[] {
-    return this.courses.filter((course) => course.id === id);
-  }
+  // getCourseId(id: number): ICourse[] {
+  //   return this.courses.filter((course) => course.id === id);
+  // }
 
   updateCourse(
     id: number,
@@ -43,8 +69,20 @@ export class CoursesService {
     );
   }
 
-  removeCourse(id: number): ICourse[] {
-    this.courses = this.courses.filter((course) => course.id !== id);
-    return this.courses;
+  removeCourse(id: string): any {
+    console.log(id);
+    const api = `${this.endpoint}/${id}`
+    return this.http.delete(api, httpOptions)
+      .subscribe(
+        (val) => {
+          console.log('DELETE call successful value returned in body',
+            val);
+        },
+        response => {
+          console.log('DELETE call in error', response);
+        },
+        () => {
+          console.log('The DELETE observable is now completed.');
+        });
   }
 }
