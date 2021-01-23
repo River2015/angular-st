@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ICourse} from '../models/course';
-import {COURSES} from '../mocks';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
@@ -20,8 +19,8 @@ export class CoursesService {
   endpoint = 'http://localhost:3004/courses/';
   constructor(private http: HttpClient, private router: Router, private handleError: ErrorService) { }
 
-  getCourses(): Observable<any>{
-    const api = `${this.endpoint}`;
+  getCourses(start?, count?, sort?, textFragment?): Observable<any>{
+    const api = `${this.endpoint}?start=${start}&count=${count}`;
     return this.http.get(api, httpOptions).pipe(
       map((res: Response) => {
         return res || {};

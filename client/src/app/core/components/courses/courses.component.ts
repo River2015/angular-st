@@ -1,9 +1,7 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
-import {ICourse} from '../../models/course';
 import {SearchPipe} from '../../pipes/search.pipe';
 import {CoursesService} from '../../services/courses.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'study-courses',
@@ -15,6 +13,9 @@ import {Observable} from 'rxjs';
 export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
   courses;
+  start: number;
+  count: number;
+  name: string;
 
   constructor(
     private searchPipe: SearchPipe,
@@ -25,27 +26,36 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
     // this.courses$ = this.httpClient.get<ICourse[]>('http://localhost:3004/courses')
       // .pipe(catchError(handleError());
-    this.courses = this.coursesService.getCourses();
+    this.start = 0;
+    this.count = 10;
+    this.courses = this.coursesService.getCourses(this.start, this.count);
   }
 
   loadMore(): void {
-    console.log(' courses loaded');
+    this.start  = this.start + this.count + 1;
+    this.courses = this.coursesService.getCourses(this.start, this.count);
   }
 
   delete(id: string): void {
     const isConfirm = confirm('Are you sure to delete item?');
     if (isConfirm){
-      this.courses = this.courses.filter(course => course.id !== id);
+      // this.courses = this.courses.filter(course => course.id !== id);
       this.coursesService.removeCourse(id);
+      this.start = 0;
+      this.count = 10;
+      this.courses = this.coursesService.getCourses(this.start, this.count);
+
     } else { return; }
   }
 
-  // search(searchText: string): any {
-  //   if (!searchText) {
-  //     this.courses = COURSES;               // there is filtering pipe in template
-  //   }
-  //   this.courses = this.searchPipe.transform( this.courses, searchText);
-  // }
+  search(textFragment: string): any {
+    // this.courses = this.coursesService.getCourses(textFragment);
+    if (!textFragment) {
+      this.ngOnInit();
+    } else {
+      this.courses = this.coursesService.getCourses(textFragment);
+    }
+  }
 
   add(): void {
     this.router.navigateByUrl('courses/add');
