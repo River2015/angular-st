@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {ICourse} from '../models/course';
+// import {ICourse} from '../models/course';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, retry} from 'rxjs/operators';
 import {ErrorService} from './error.service';
 
 
@@ -29,8 +29,8 @@ export class CoursesService {
     );
   }
 
-  getCoursesId(id: string): Observable<any>{
-    const api = `${this.endpoint}/${id}`
+  getCoursesId(id: number): Observable<any>{
+    const api = `${this.endpoint}/${id}`;
     return this.http.get(api, httpOptions).pipe(
       map((res: Response) => {
         return res || {};
@@ -39,49 +39,33 @@ export class CoursesService {
     );
   }
 
-  addCourse(course: ICourse): Array<ICourse> {
-    return [...this.courses, course];
+  addCourse(course: any): Observable<any> {
+    const api = `${this.endpoint}`;
+    return this.http.post<any>(api, JSON.stringify(course), httpOptions)
+      // .pipe(
+      //   retry(1),
+      //   catchError(this.handleError)
+      // );
   }
 
-  // getCourseId(id: number): ICourse[] {
-  //   return this.courses.filter((course) => course.id === id);
-  // }
-
-  updateCourse(
-    id: number,
-    title: string,
-    creation: string,
-    duration: number,
-    description: string): ICourse[] {
-      return this.courses.filter((course) => {
-        if (course.id === id) {
-          const updatedCourse = {
-            id,
-            title,
-            creation,
-            duration,
-            description
-          };
-          return { ...course, ...updatedCourse};
-        }
-      }
-    );
+  updateCourse(id, course): Observable<any> {
+    const api = `${this.endpoint}/${id}`;
+    return this.http.put<any>(api, JSON.stringify(course), httpOptions)
+      // .pipe(
+      //   retry(1),
+      //   catchError(this.handleError)
+      // )
   }
 
-  removeCourse(id: string): any {
-    console.log(id);
+  removeCourse(id: number): any {
     const api = `${this.endpoint}/${id}`
     return this.http.delete(api, httpOptions)
       .subscribe(
-        (val) => {
-          console.log('DELETE call successful value returned in body',
-            val);
+        (course) => {
+          console.log(course);
         },
-        response => {
-          console.log('DELETE call in error', response);
-        },
-        () => {
-          console.log('The DELETE observable is now completed.');
+        err => {
+          console.log(err);
         });
   }
 }

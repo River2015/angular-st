@@ -7,7 +7,8 @@
       class="study-course"
       [ngClass]="{ 'study-courses--rated': course.isTopRated === true}"
       (courseDelete)="delete($event)"
-      *ngFor="let course of courses | async | filter: 'isTopRated' : true | orderBy:'duration'"
+      (courseEdit)="edit($event)"
+      *ngFor="let course of courses | async "
       [course]="course"
       appCourseBorder [creation]="course.date"
     ></study-course>

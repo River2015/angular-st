@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {CoursesService} from '../../services/courses.service';
 
 @Component({
   selector: 'study-add-course',
@@ -9,10 +10,13 @@ import {Router} from '@angular/router';
 export class AddCourseComponent implements OnInit {
   value = '';
 
-  constructor(private router: Router) { }
+  @Input() courses = { id: 0, name: '', date: '', length: 0, author: [], isTopRated: true };
+
+  constructor(private router: Router, private coursesService: CoursesService) { }
 
   ngOnInit(): void {
   }
+
   onEnter(value: string): void {
     this.value = value;
   }
@@ -21,7 +25,9 @@ export class AddCourseComponent implements OnInit {
   }
 
   save(): void {
-    this.router.navigateByUrl('/courses');
+    this.coursesService.addCourse(this.courses).subscribe(() => {
+      this.router.navigate(['/courses']);
+    });
   }
 
   number(val): number {

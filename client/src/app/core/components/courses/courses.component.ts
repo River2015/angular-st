@@ -9,13 +9,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./courses.component.less'],
 })
 
-
 export class CoursesComponent implements OnInit {
   @HostBinding('class')class = 'study-courses';
   courses;
   start: number;
   count: number;
   name: string;
+  course;
 
   constructor(
     private searchPipe: SearchPipe,
@@ -24,8 +24,6 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.courses$ = this.httpClient.get<ICourse[]>('http://localhost:3004/courses')
-      // .pipe(catchError(handleError());
     this.start = 0;
     this.count = 10;
     this.courses = this.coursesService.getCourses(this.start, this.count);
@@ -36,16 +34,21 @@ export class CoursesComponent implements OnInit {
     this.courses = this.coursesService.getCourses(this.start, this.count);
   }
 
-  delete(id: string): void {
+  delete(id: number): void {
     const isConfirm = confirm('Are you sure to delete item?');
     if (isConfirm){
-      // this.courses = this.courses.filter(course => course.id !== id);
       this.coursesService.removeCourse(id);
       this.start = 0;
       this.count = 10;
       this.courses = this.coursesService.getCourses(this.start, this.count);
 
     } else { return; }
+  }
+
+  edit(id: number): void {
+    this.coursesService.getCoursesId(id).subscribe((data) => {
+      this.course = data;
+    });
   }
 
   search(textFragment: string): any {
@@ -60,5 +63,4 @@ export class CoursesComponent implements OnInit {
   add(): void {
     this.router.navigateByUrl('courses/add');
   }
-
 }

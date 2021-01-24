@@ -2,24 +2,24 @@
   <h1  class="study-course__title">New course</h1>
   <div class="study-course__item">
     <label>Title<span>is required</span></label>
-    <input type="text"/>
+    <input type="text" [(ngModel)]="courses.name"/>
   </div>
   <div class="study-course__item">
     <label>Description <span>is required</span></label>
-    <textarea></textarea>
+    <textarea ></textarea>
   </div>
   <div class="study-course__item study-course__item--w250" >
     <label>Duration<span>is required</span></label>
-    <input type="text" #duration (keyup.enter)="onEnter(duration.value)"/>
+    <input [(ngModel)]="courses.length" type="text" #duration (keyup.enter)="onEnter(duration.value)"/>
     <p *ngIf="value" class="study-course__duration">{{number(value) | duration}}</p>
   </div>
 
   <div class="study-course__item study-course__item--w250">
     <label>Date<span>is required</span></label>
-    <input type="text" />
+    <input [(ngModel)]="courses.date" type="text" />
   </div>
   <div class="study-course__item study-course__item--w400">
-    <label>Author<span>is required</span></label>
+    <label [(ngModel)]="courses.author">Author<span>is required</span></label>
     <input type="text"/>
   </div>
   <div class="study-course__controls">

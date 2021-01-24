@@ -1,4 +1,4 @@
-<div *ngFor="let course of courses" class="study-course__form">
+<div class="study-course__form">
   <h1  class="study-course__title">{{course.name}}</h1>
   <div class="study-course__item">
     <label>Title<span>is required</span></label>
@@ -10,7 +10,7 @@
   </div>
   <div class="study-course__item study-course__item--w250" >
     <label>Duration<span>is required</span></label>
-    <input type="text" [value]="course.length" />
+    <input type="text" [value]="course.length"/>
   </div>
 
   <div class="study-course__item study-course__item--w250">

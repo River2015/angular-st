@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnInit, Output,} from '@angular/core';
 import {ICourse} from '../../../../models/course';
 import {Router} from '@angular/router';
-import {COURSES} from '../../../../mocks';
 
 
 @Component({
@@ -12,7 +11,6 @@ import {COURSES} from '../../../../mocks';
 })
 export class CourseComponent implements OnInit {
   @HostBinding('class')class = 'study-course';
-  courses: Array<ICourse> = COURSES;
 
   @Input() course: ICourse;
 
@@ -25,6 +23,7 @@ export class CourseComponent implements OnInit {
   }
 
   edit(): void {
+    this.courseEdit.emit(this.course.id);
     this.router.navigate([ 'courses', 'edit', this.course.id]);
   }
 

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ICourse} from '../../models/course';
-import {COURSES} from '../../mocks';
+import {ICourseEdited} from '../../models/course';
+import {CoursesService} from '../../services/courses.service';
+
 
 @Component({
   selector: 'study-edit-course',
@@ -9,21 +10,31 @@ import {COURSES} from '../../mocks';
   styleUrls: ['./edit-course.component.less']
 })
 export class EditCourseComponent implements OnInit {
-  @Input() course: ICourse;
-  courses: Array<ICourse> = COURSES;
+  course;
+  id: number;
+  courseEdited: ICourseEdited;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, private coursesService: CoursesService) {}
 
   ngOnInit(): any {
-    this.courses = this.courses.filter((course) => course.id === Number(this.route.snapshot.params.id));
+    this.id = Number(this.route.snapshot.params.id);
+    this.coursesService.getCoursesId(this.id).subscribe((data) => {
+      this.course = data;
+    });
+    this.courseEdited.id = this.id;
   }
 
   cancel(): void {
     this.router.navigateByUrl('/courses');
   }
 
+
+  // TODO: get changed data from formfields in task "Form"
+
   save(): void {
-    this.router.navigateByUrl('/courses');
+    this.coursesService.updateCourse(this.id, this.course).subscribe(() => {
+      this.router.navigate(['/courses']);
+    });
   }
 
 }
