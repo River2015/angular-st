@@ -10,7 +10,7 @@
       (courseEdit)="edit($event)"
       *ngFor="let course of courses | async "
       [course]="course"
-      appCourseBorder [creation]="course.date"
+      appCourseBorder [creation]="course?.date"
     ></study-course>
     <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
   </div>

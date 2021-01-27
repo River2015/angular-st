@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
     const token = this.authService.getUser();
     this.authService.getUserProfile(token).subscribe(
       data => {
-        console.log(data);
         this.data = data;
       },
       err => {

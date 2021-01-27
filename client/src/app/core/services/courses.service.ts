@@ -68,4 +68,14 @@ export class CoursesService {
           console.log(err);
         });
   }
+
+  searchCourse(textFragment: any): Observable<any> {
+    const api = `${this.endpoint}?textFragment=${textFragment}`;
+    return this.http.get(api, httpOptions).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      // catchError(this.handleError);
+    );
+  }
 }

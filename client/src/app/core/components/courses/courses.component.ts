@@ -51,12 +51,14 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  search(textFragment: string): any {
-    // this.courses = this.coursesService.getCourses(textFragment);
+  search(textFragment: string): void {
     if (!textFragment) {
       this.ngOnInit();
     } else {
-      this.courses = this.coursesService.getCourses(textFragment);
+      this.courses = this.coursesService.searchCourse(textFragment)
+        .subscribe((data) => {
+            return data;
+          });
     }
   }
 
