@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {observable, Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
+import {IUser} from '../models/user';
 
 const API = 'http://localhost:3004/auth/';
 
@@ -35,16 +36,16 @@ export class AuthService {
       }
     }
 
-    getUser(): string {
+    getUser(): Observable<string> {
       return JSON.parse(localStorage.getItem('user'));
     }
 
-    isAuth(): boolean {
-      return !!localStorage.getItem('user');
+    isAuth(): Observable<boolean> {
+      return of (!!localStorage.getItem('user'));
     }
 
-    getUserProfile(token: string): Observable<any> {
-      return this.http.post(API + 'userinfo', {
+    getUserProfile(token: Observable<string>): Observable<IUser> {
+      return this.http.post<IUser>(API + 'userinfo', {
         token
       }, httpOptions);
     }

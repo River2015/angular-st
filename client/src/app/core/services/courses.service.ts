@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
-import {catchError, map, retry} from 'rxjs/operators';
+import {catchError, concatMap, map, retry} from 'rxjs/operators';
 import {ErrorService} from './error.service';
+import {ICourse} from '../models/course';
 
 
 const httpOptions = {
@@ -50,7 +51,7 @@ export class CoursesService {
 
   updateCourse(id, course): Observable<any> {
     const api = `${this.endpoint}/${id}`;
-    return this.http.put<any>(api, JSON.stringify(course), httpOptions)
+    return this.http.put(api, JSON.stringify(course), httpOptions)
       // .pipe(
       //   retry(1),
       //   catchError(this.handleError)
@@ -58,24 +59,26 @@ export class CoursesService {
   }
 
   removeCourse(id: number): any {
+    const start = 0;
+    const count = 10;
     const api = `${this.endpoint}/${id}`
     return this.http.delete(api, httpOptions)
-      .subscribe(
-        (course) => {
-          console.log(course);
-        },
-        err => {
-          console.log(err);
-        });
+      .pipe(
+        concatMap(() => this.getCourses( start, count)),
+        // catchError(this.handleError)
+      );
+      // .subscribe(
+      //   (course) => {
+      //     console.log(course);
+      //   },
+      //   err => {
+      //     console.log(err);
+      //   });
   }
 
-  searchCourse(textFragment: any): Observable<any> {
+
+  searchCourse(textFragment: any): any {
     const api = `${this.endpoint}?textFragment=${textFragment}`;
-    return this.http.get(api, httpOptions).pipe(
-      map((res: Response) => {
-        return res || {};
-      }),
-      // catchError(this.handleError);
-    );
+    return this.http.get(api, httpOptions);
   }
 }

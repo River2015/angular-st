@@ -18,6 +18,7 @@ import { AddCourseComponent } from './components/add-course/add-course.component
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import {RouterModule} from '@angular/router';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {RouterModule} from '@angular/router';
     AddCourseComponent,
     NotFoundComponent,
     EditCourseComponent,
+    SpinnerComponent,
   ],
   exports: [
     HeaderComponent,
