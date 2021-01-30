@@ -45,7 +45,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     HeaderComponent,
     CoursesComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './core/intercepters/auth.interceptor';
+import {SpinnerInterceptor} from './core/intercepters/spinner.interceptor';
 
 
 @NgModule({
@@ -19,11 +20,8 @@ import {AuthInterceptor} from './core/intercepters/auth.interceptor';
     HttpClientModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
-<div class="study-courses" *ngIf="!loading; else loadingTpl">
+<div class="study-courses">
   <study-courses-search (searchPass)="onSearchPass($event)" ></study-courses-search>
   <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
   <div *ngIf="courses; else wellcomeAddMessage">
@@ -20,7 +20,4 @@
   <div class="study-courses__message">no data, feel free to add new course</div>
 </ng-template>
 
-<ng-template #loadingTpl>
-  <study-spinner></study-spinner>
-</ng-template>
 
