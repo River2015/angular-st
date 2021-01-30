@@ -20,6 +20,7 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import {RouterModule} from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
+
 @NgModule({
   declarations: [
     HeaderComponent,
