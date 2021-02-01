@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "study"
+    }
+  },
+  "defaultProject": "study",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
