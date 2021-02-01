@@ -21,7 +21,6 @@ export class EditCourseComponent implements OnInit {
     this.coursesService.getCoursesId(this.id).subscribe((data) => {
       this.course = data;
     });
-    this.courseEdited.id = this.id;
   }
 
   cancel(): void {
