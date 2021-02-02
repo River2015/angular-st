@@ -16,7 +16,7 @@ export class AddCourseComponent implements OnInit {
   @Input() newCourseItem = { id: 0, name: '', description: '', date: '', length: 0, author: [], isTopRated: true };
   value = '';
   loading$: Observable<boolean>;
-  error$: Observable<Error>
+  error$: Observable<Error>;
 
   constructor(private router: Router, private coursesService: CoursesService,
               private store: Store<CoursesAppState>) { }
@@ -42,5 +42,25 @@ export class AddCourseComponent implements OnInit {
 
   number(val): number {
     return Number(val);
+  }
+
+  focusoutHandlerName(event): void {
+    this.newCourseItem.name = event.target.value;
+  }
+
+  focusoutHandlerDate(event): void {
+    this.newCourseItem.date = event.target.value;
+  }
+
+  focusoutHandlerDescription(event): void {
+    this.newCourseItem.description = event.target.value;
+  }
+
+  focusoutHandlerAuthor(event): void {
+    this.newCourseItem.author = event.target.value;
+  }
+
+  focusoutHandlerLength(event): void {
+    this.newCourseItem.length = event.target.value;
   }
 }

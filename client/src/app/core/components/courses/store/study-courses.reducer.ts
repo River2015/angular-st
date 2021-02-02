@@ -50,34 +50,6 @@ export function CoursesReducer(state: CoursesState = initialState, action: Cours
         loading: false
       };
 
-    case CoursesActionTypes.EDIT_COURSE:
-      return {
-        ...state,
-        loading: true
-      };
-    case CoursesActionTypes.EDIT_COURSE_SUCCESS:
-      return {
-        ...state,
-        list: state.list.forEach((course) => {
-          if (course.id === action.payload.course.id) {
-            course.name = action.payload.course.name;
-            course.description = action.payload.course.description;
-            course.date = action.payload.course.date;
-            course.length = action.payload.course.length;
-            course.isTopRated = action.payload.course.isTopRated;
-            course.author = action.payload.course.author ;
-          }
-          return course;
-        }),
-        loading: false
-      };
-    case CoursesActionTypes.EDIT_COURSE_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false
-      };
-
     case CoursesActionTypes.DELETE_COURSE:
       return {
         ...state,

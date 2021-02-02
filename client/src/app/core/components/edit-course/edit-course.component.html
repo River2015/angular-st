@@ -2,24 +2,24 @@
   <h1  class="study-course__title">{{course?.name}}</h1>
   <div class="study-course__item">
     <label>Title<span>is required</span></label>
-    <input type="text" [value]="course?.name"/>
+    <input type="text" name="name" [value]="course?.name" (focusout)="focusoutHandlerName($event)"/>
   </div>
   <div class="study-course__item">
     <label>Description <span>is required</span></label>
-    <textarea [value]="course?.description"></textarea>
+    <textarea [value]="course?.description" (focusout)="focusoutHandlerDescription($event)"></textarea>
   </div>
   <div class="study-course__item study-course__item--w250" >
     <label>Duration<span>is required</span></label>
-    <input type="text" [value]="course?.length"/>
+    <input type="text" [value]="course?.length" (focusout)="focusoutHandlerLength($event)"/>
   </div>
 
   <div class="study-course__item study-course__item--w250">
     <label>Date<span>is required</span></label>
-    <input type="text" [value]="course?.date" />
+    <input type="text" [value]="course?.date" (focusout)="focusoutHandlerDate($event)"/>
   </div>
   <div class="study-course__item study-course__item--w400">
     <label>Author<span>is required</span></label>
-    <input type="text" [value]="course?.author"/>
+    <input type="text" [value]="course?.author" (focusout)="focusoutHandlerAuthor($event)"/>
   </div>
   <div class="study-course__controls">
     <button (click)="cancel()" class="btn-grey btn-large study-courses__edit-btn">cancel</button>
