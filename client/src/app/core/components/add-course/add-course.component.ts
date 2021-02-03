@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CoursesService} from '../../services/courses.service';
-import {AddCourseSuccessAction} from '../courses/store/study-courses.actions';
+import {AddCourseSuccessAction} from '../courses/store/courses.actions';
 import {Observable} from 'rxjs';
 import {ICourse} from '../../models/course';
 import {Store} from '@ngrx/store';

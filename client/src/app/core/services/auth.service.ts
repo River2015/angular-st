@@ -28,7 +28,6 @@ export class AuthService {
         });
     }
 
-
     logoutUser(): void {
       const removeToken = localStorage.removeItem('user');
       if (removeToken == null) {

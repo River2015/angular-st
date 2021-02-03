@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IAuthor, ICourse} from '../../models/course';
 import {CoursesService} from '../../services/courses.service';
-import { LoadCoursesAction} from '../courses/store/study-courses.actions';
+import {AddCourseSuccessAction, EditCourseAction, EditCourseSuccessAction, LoadCoursesAction} from '../courses/store/courses.actions';
 import {Store} from '@ngrx/store';
 import {CoursesAppState} from '../../models/courses-state.model';
 
@@ -59,11 +59,18 @@ export class EditCourseComponent implements OnInit {
 
 
   // TODO: get changed data from formfields in task "Form"
-
+  
   save(): void {
-    this.coursesService.updateCourse(this.id, this.editedCourseItem).subscribe(() => {
-      this.router.navigate(['/courses']);
-    });
+    const payload = {
+      id: this.id,
+      course: this.editedCourseItem,
+    };
+    console.log(payload)
+    this.store.dispatch(new EditCourseAction(payload));
+    this.router.navigate(['/courses']);
+    // this.coursesService.updateCourse(this.id, this.editedCourseItem).subscribe(() => {
+    //   this.router.navigate(['/courses']);
+    // });
     this.store.dispatch(new LoadCoursesAction());
   }
 

@@ -1,4 +1,4 @@
-import { CoursesState } from '../components/courses/store/study-courses.reducer';
+import { CoursesState } from '../components/courses/store/courses.reducer';
 
 export interface CoursesAppState {
   readonly courses: CoursesState;

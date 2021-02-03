@@ -18,7 +18,7 @@ import {
   LoadCoursesFailureAction,
   LoadCoursesSuccessAction,
   DeleteCourseFailureAction
-} from './study-courses.actions';
+} from './courses.actions';
 
 
 @Injectable()

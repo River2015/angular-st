@@ -9,7 +9,7 @@ import {IAuthor, ICourse} from '../../models/course';
 import {
   DeleteCourseSuccessAction,
   LoadCoursesAction
-} from './store/study-courses.actions';
+} from './store/courses.actions';
 
 @Component({
   selector: 'study-courses',
@@ -27,7 +27,7 @@ export class CoursesComponent implements OnInit {
 
   courseItems: Observable<Array<ICourse>>;
   loading$: Observable<boolean>;
-  error$: Observable<Error>
+  error$: Observable<Error>;
 
   constructor(
     private searchPipe: SearchPipe,
@@ -40,10 +40,7 @@ export class CoursesComponent implements OnInit {
     this.courseItems = this.store.select(store => store.courses.list);
     this.loading$ = this.store.select(store => store.courses.loading);
     this.error$ = this.store.select(store => store.courses.error);
-
     this.store.dispatch(new LoadCoursesAction());
-    // this.start = 0;
-    // this.count = 10;
   }
 
   delete(id: number) {
