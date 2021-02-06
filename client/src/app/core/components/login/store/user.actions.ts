@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { IUser } from '../../../models/user';
 
 export enum UserActionTypes {
   LOGIN = '[Login] LOGIN',

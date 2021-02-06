@@ -1,12 +1,11 @@
 import {UserActions, UserActionTypes} from './user.actions';
-import {IUser} from '../../../models/user';
 
 export interface UserState {
   user: {
     first: string,
     last: string,
   };
-  loggedIn: boolean;
+  token: string;
   isLoading: boolean;
   error: boolean;
 }
@@ -16,7 +15,7 @@ const initialState: UserState = {
     first: null,
     last: null,
   },
-  loggedIn: null,
+  token: null,
   isLoading: false,
   error: false,
 };
@@ -32,7 +31,7 @@ export function UserReducer(state: UserState = initialState, action: UserActions
     case UserActionTypes.LOGIN_COMPLETE:
       return {
         ...state,
-        loggedIn: action.payload,
+        token: action.payload.token,
         isLoading: false,
       };
     case UserActionTypes.LOGIN_ERROR:

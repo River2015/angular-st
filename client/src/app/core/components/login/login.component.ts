@@ -13,18 +13,25 @@ import {Login} from './store/user.actions';
 export class LoginComponent implements OnInit {
   name = '';
   password = '';
-
+  // token;
   payload = { login: 'Morales', password: 'id'}
   constructor(private authService: AuthService,
               private store: Store<CoursesAppState>,
               private router: Router) { }
 
   ngOnInit(): void {
+    // this.store.subscribe(state =>
+    //   this.token = state.user.token
+    // );
+    this.store.subscribe(state =>
+      console.log(state)
+  );
   }
   login(): any{
-    // this.store.dispatch(new Login(this.payload));
-    // this.router.navigateByUrl('/courses');
-    this.authService.loginUser('Morales', 'id');
-    console.log(this.authService.getUser(), 'login successfully');
+    this.store.dispatch(new Login(this.payload));
+   // this.authService.getUser();
+    this.router.navigateByUrl('/courses');
+    // this.authService.loginUser('Morales', 'id');
+    // console.log(this.authService.getUser(), 'login successfully');
   }
 }
