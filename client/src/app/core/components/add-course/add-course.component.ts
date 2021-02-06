@@ -10,7 +10,7 @@ import {CoursesService} from '../../services/courses.service';
 export class AddCourseComponent implements OnInit {
   value = '';
 
-  @Input() courses = { id: 0, name: '', date: '', length: 0, author: [], isTopRated: true };
+  @Input() newCourseItem = { id: 0, name: '', description: '', date: '', length: 0, author: [], isTopRated: true };
 
   constructor(private router: Router, private coursesService: CoursesService) { }
 
@@ -25,12 +25,33 @@ export class AddCourseComponent implements OnInit {
   }
 
   save(): void {
-    this.coursesService.addCourse(this.courses).subscribe(() => {
+    this.newCourseItem.id = Number(new Date());
+    this.coursesService.addCourse(this.newCourseItem).subscribe(() => {
       this.router.navigate(['/courses']);
     });
   }
 
   number(val): number {
     return Number(val);
+  }
+
+  focusoutHandlerName(event): void {
+    this.newCourseItem.name = event.target.value;
+  }
+
+  focusoutHandlerDate(event): void {
+    this.newCourseItem.date = event.target.value;
+  }
+
+  focusoutHandlerDescription(event): void {
+    this.newCourseItem.description = event.target.value;
+  }
+
+  focusoutHandlerAuthor(event): void {
+    this.newCourseItem.author = event.target.value;
+  }
+
+  focusoutHandlerLength(event): void {
+    this.newCourseItem.length = event.target.value;
   }
 }

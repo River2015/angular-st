@@ -16,6 +16,8 @@ export class CoursesComponent implements OnInit {
   count: number;
   name: string;
   course;
+  loading = false;
+
 
   constructor(
     private searchPipe: SearchPipe,
@@ -24,9 +26,14 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.start = 0;
     this.count = 10;
     this.courses = this.coursesService.getCourses(this.start, this.count);
+  }
+
+  onSearchPass(searchText: string): any{
+    this.courses = this.coursesService.searchCourse(searchText);
   }
 
   loadMore(): void {
@@ -37,10 +44,7 @@ export class CoursesComponent implements OnInit {
   delete(id: number): void {
     const isConfirm = confirm('Are you sure to delete item?');
     if (isConfirm){
-      this.coursesService.removeCourse(id);
-      this.start = 0;
-      this.count = 10;
-      this.courses = this.coursesService.getCourses(this.start, this.count);
+      this.courses = this.coursesService.removeCourse(id);
 
     } else { return; }
   }
@@ -49,17 +53,6 @@ export class CoursesComponent implements OnInit {
     this.coursesService.getCoursesId(id).subscribe((data) => {
       this.course = data;
     });
-  }
-
-  search(textFragment: string): void {
-    if (!textFragment) {
-      this.ngOnInit();
-    } else {
-      this.courses = this.coursesService.searchCourse(textFragment)
-        .subscribe((data) => {
-            return data;
-          });
-    }
   }
 
   add(): void {

@@ -1,6 +1,7 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'study-header',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
   @HostBinding('class')class = 'study-header';
 
-  isAuth = true;
+  isAuth: Observable<boolean>;
 
   constructor(private authService: AuthService, private router: Router) { }
 
