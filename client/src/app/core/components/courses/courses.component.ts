@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {IAuthor, ICourse} from '../../models/course';
 import {
   DeleteCourseSuccessAction,
-  LoadCoursesAction
+  LoadCoursesAction, LoadMoreCoursesAction
 } from './store/courses.actions';
 
 @Component({
@@ -43,7 +43,7 @@ export class CoursesComponent implements OnInit {
     this.store.dispatch(new LoadCoursesAction());
   }
 
-  delete(id: number) {
+  delete(id: number): void {
     const isConfirm = confirm('Are you sure to delete item?');
     if (isConfirm){
       this.store.dispatch(new DeleteCourseSuccessAction(id));
@@ -55,9 +55,7 @@ export class CoursesComponent implements OnInit {
   }
 
   loadMore(): void {
-    this.store.dispatch(new LoadCoursesAction());
-    this.start  = this.start + this.count + 1;
-    this.courses = this.coursesService.getCourses(this.start, this.count);
+    this.store.dispatch(new LoadMoreCoursesAction());
   }
 
   edit(id: number): void {

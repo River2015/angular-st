@@ -5,9 +5,7 @@ export enum CoursesActionTypes {
   LOAD_COURSES = '[COURSES] Load Courses',
   LOAD_COURSES_SUCCESS = '[COURSES] Load Courses Success',
   LOAD_COURSES_FAILURE = '[COURSES] Load Courses Failure',
-  LOAD_COURSE = '[COURSES] Load Course',
-  LOAD_COURSE_SUCCESS = '[COURSES] Load Course Success',
-  LOAD_COURSE_FAILURE = '[COURSES] Load Course Failure',
+  LOAD_MORE_COURSES = '[COURSES] Load More Courses',
   ADD_COURSE = '[COURSES] Add Course',
   ADD_COURSE_SUCCESS = '[COURSES] Add Course Success',
   ADD_COURSE_FAILURE = '[COURSES] Add Course Failure',
@@ -22,6 +20,10 @@ export enum CoursesActionTypes {
 
 export class LoadCoursesAction implements Action {
   readonly type = CoursesActionTypes.LOAD_COURSES;
+}
+
+export class LoadMoreCoursesAction implements Action {
+  readonly type = CoursesActionTypes.LOAD_MORE_COURSES;
 }
 
 export class LoadCoursesSuccessAction implements Action {

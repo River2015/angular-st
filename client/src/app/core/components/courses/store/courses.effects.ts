@@ -17,7 +17,7 @@ import {
   LoadCoursesAction,
   LoadCoursesFailureAction,
   LoadCoursesSuccessAction,
-  DeleteCourseFailureAction
+  DeleteCourseFailureAction, LoadMoreCoursesAction
 } from './courses.actions';
 
 
@@ -25,12 +25,26 @@ import {
 export class CoursesEffects {
   start = 0;
   count = 10;
+  load: number;
   loadCourses$ = createEffect(() => this.actions$
     .pipe(
     ofType<LoadCoursesAction>(CoursesActionTypes.LOAD_COURSES),
     mergeMap(() => this.coursesService.getCourses(this.start, this.count)
       .pipe(
         map(courses => new LoadCoursesSuccessAction ( courses ),
+            catchError(error => of(new LoadCoursesFailureAction(error)))
+          )
+        )
+      )
+    )
+  );
+
+  loadMoreCourses$ = createEffect(() => this.actions$
+    .pipe(
+      ofType<LoadMoreCoursesAction>(CoursesActionTypes.LOAD_MORE_COURSES),
+      mergeMap(() => this.coursesService.getCourses(this.load, this.count)
+        .pipe(
+          map(courses => new LoadCoursesSuccessAction ( courses ),
             catchError(error => of(new LoadCoursesFailureAction(error)))
           )
         )
@@ -82,5 +96,7 @@ export class CoursesEffects {
   constructor(
     private actions$: Actions,
     private coursesService: CoursesService
-  ) {}
+  ) {
+    this.load = this.start + this.count + 1;
+  }
 }
