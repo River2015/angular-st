@@ -65,7 +65,6 @@ export class EditCourseComponent implements OnInit {
       id: this.id,
       course: this.editedCourseItem,
     };
-    console.log(payload)
     this.store.dispatch(new EditCourseAction(payload));
     this.router.navigate(['/courses']);
     // this.coursesService.updateCourse(this.id, this.editedCourseItem).subscribe(() => {
