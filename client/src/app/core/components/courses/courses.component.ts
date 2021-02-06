@@ -2,6 +2,14 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 import {SearchPipe} from '../../pipes/search.pipe';
 import {CoursesService} from '../../services/courses.service';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {CoursesAppState} from '../../models/courses-state.model';
+import {Observable} from 'rxjs';
+import {IAuthor, ICourse} from '../../models/course';
+import {
+  DeleteCourseSuccessAction,
+  LoadCoursesAction, LoadMoreCoursesAction
+} from './store/courses.actions';
 
 @Component({
   selector: 'study-courses',
@@ -16,20 +24,30 @@ export class CoursesComponent implements OnInit {
   count: number;
   name: string;
   course;
-  loading = false;
 
+  courseItems: Observable<Array<ICourse>>;
+  loading$: Observable<boolean>;
+  error$: Observable<Error>;
 
   constructor(
     private searchPipe: SearchPipe,
     private coursesService: CoursesService,
     private router: Router,
+    private store: Store<CoursesAppState>
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.start = 0;
-    this.count = 10;
-    this.courses = this.coursesService.getCourses(this.start, this.count);
+    this.courseItems = this.store.select(store => store.courses.list);
+    this.loading$ = this.store.select(store => store.courses.loading);
+    this.error$ = this.store.select(store => store.courses.error);
+    this.store.dispatch(new LoadCoursesAction());
+  }
+
+  delete(id: number): void {
+    const isConfirm = confirm('Are you sure to delete item?');
+    if (isConfirm){
+      this.store.dispatch(new DeleteCourseSuccessAction(id));
+    } else { return; }
   }
 
   onSearchPass(searchText: string): any{
@@ -37,16 +55,7 @@ export class CoursesComponent implements OnInit {
   }
 
   loadMore(): void {
-    this.start  = this.start + this.count + 1;
-    this.courses = this.coursesService.getCourses(this.start, this.count);
-  }
-
-  delete(id: number): void {
-    const isConfirm = confirm('Are you sure to delete item?');
-    if (isConfirm){
-      this.courses = this.coursesService.removeCourse(id);
-
-    } else { return; }
+    this.store.dispatch(new LoadMoreCoursesAction());
   }
 
   edit(id: number): void {

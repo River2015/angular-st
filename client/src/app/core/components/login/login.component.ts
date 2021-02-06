@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {CoursesAppState} from '../../models/courses-state.model';
+import {Login} from './store/user.actions';
 
 @Component({
   selector: 'study-login',
@@ -10,12 +13,25 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   name = '';
   password = '';
-  constructor(private authService: AuthService, private router: Router) { }
+  // token;
+  payload = { login: 'Morales', password: 'id'}
+  constructor(private authService: AuthService,
+              private store: Store<CoursesAppState>,
+              private router: Router) { }
 
   ngOnInit(): void {
+    // this.store.subscribe(state =>
+    //   this.token = state.user.token
+    // );
+    this.store.subscribe(state =>
+      console.log(state)
+  );
   }
   login(): any{
-    this.authService.loginUser('Morales', 'id');
-    console.log(this.authService.getUser(), 'login successfully');
+    this.store.dispatch(new Login(this.payload));
+   // this.authService.getUser();
+    this.router.navigateByUrl('/courses');
+    // this.authService.loginUser('Morales', 'id');
+    // console.log(this.authService.getUser(), 'login successfully');
   }
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-// import {ICourse} from '../models/course';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
-import {catchError, concatMap, map, retry} from 'rxjs/operators';
+import {catchError, concatMap, delay, map, retry} from 'rxjs/operators';
 import {ErrorService} from './error.service';
 import {ICourse} from '../models/course';
 
@@ -20,12 +19,14 @@ export class CoursesService {
   endpoint = 'http://localhost:3004/courses/';
   constructor(private http: HttpClient, private router: Router, private handleError: ErrorService) { }
 
-  getCourses(start?, count?, sort?, textFragment?): Observable<any>{
+  getCourses(start?, count?, sort?, textFragment?){
     const api = `${this.endpoint}?start=${start}&count=${count}`;
-    return this.http.get(api, httpOptions).pipe(
-      map((res: Response) => {
-        return res || {};
-      }),
+    return this.http.get<ICourse[]>(api, httpOptions)
+      .pipe(
+        delay(500)
+      // map((res: Response) => {
+      //   return res || {};
+      // }),
      // catchError(this.handleError);
     );
   }
@@ -67,13 +68,6 @@ export class CoursesService {
         concatMap(() => this.getCourses( start, count)),
         // catchError(this.handleError)
       );
-      // .subscribe(
-      //   (course) => {
-      //     console.log(course);
-      //   },
-      //   err => {
-      //     console.log(err);
-      //   });
   }
 
 
