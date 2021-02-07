@@ -16,6 +16,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {UserEffects} from './core/components/login/store/user.effects';
 import {CoursesEffects} from './core/components/courses/store/courses.effects';
 import {UserReducer} from './core/components/login/store/user.reducer';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {UserReducer} from './core/components/login/store/user.reducer';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot({ courses: CoursesReducer, user: UserReducer }),
     EffectsModule.forRoot([CoursesEffects, UserEffects]),

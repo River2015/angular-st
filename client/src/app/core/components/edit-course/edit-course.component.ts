@@ -2,9 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IAuthor, ICourse} from '../../models/course';
 import {CoursesService} from '../../services/courses.service';
-import {AddCourseSuccessAction, EditCourseAction, EditCourseSuccessAction, LoadCoursesAction} from '../courses/store/courses.actions';
+import { EditCourseAction, LoadCoursesAction} from '../courses/store/courses.actions';
 import {Store} from '@ngrx/store';
 import {CoursesAppState} from '../../models/courses-state.model';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 
 
 @Component({
@@ -14,15 +15,15 @@ import {CoursesAppState} from '../../models/courses-state.model';
 })
 export class EditCourseComponent implements OnInit {
   course: ICourse;
-  @Input() editedCourseItem = { id: 0, name: '', description: '', date: '', length: 0, author: [], isTopRated: true };
-
+  form: FormGroup;
   value = '';
   id: number;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private coursesService: CoursesService,
-              private store: Store<CoursesAppState>
+              private store: Store<CoursesAppState>,
+              private fb: FormBuilder
   ) {}
 
   ngOnInit(): any {
@@ -30,40 +31,27 @@ export class EditCourseComponent implements OnInit {
     this.coursesService.getCoursesId(this.id).subscribe((data) => {
       this.course = data;
     });
-
+    this.createForm();
   }
 
   cancel(): void {
     this.router.navigateByUrl('/courses');
   }
 
-  focusoutHandlerName(event): void {
-    this.editedCourseItem.name = event.target.value || this.course.name;
-  }
-
-  focusoutHandlerDate(event): void {
-    this.editedCourseItem.date = event.target.value || this.course.date;
-  }
-
-  focusoutHandlerDescription(event): void {
-    this.editedCourseItem.description = event.target.value || this.course.description;
-  }
-
-  focusoutHandlerAuthor(event): void {
-    this.editedCourseItem.author = event.target.value || this.course.author;
-  }
-
-  focusoutHandlerLength(event): void {
-    this.editedCourseItem.length = event.target.value || this.course.length;
-  }
-
-
-  // TODO: get changed data from formfields in task "Form"
-  
   save(): void {
+    const editedCourseItem: ICourse = {
+      length: this.duration.value || this.course.length,
+      id: this.id,
+      description: this.description.value || this.course.description,
+      date: this.date.value || this.course.date,
+      name: this.title.value || this.course.name,
+      author: [ this.author.value] || this.course.author,
+      isTopRated: true,
+    };
+
     const payload = {
       id: this.id,
-      course: this.editedCourseItem,
+      course: editedCourseItem,
     };
     this.store.dispatch(new EditCourseAction(payload));
     this.router.navigate(['/courses']);
@@ -71,6 +59,46 @@ export class EditCourseComponent implements OnInit {
     //   this.router.navigate(['/courses']);
     // });
     this.store.dispatch(new LoadCoursesAction());
+  }
+
+  private createForm(): void {
+    this.form = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(5)]],
+      description: [null, [Validators.required, Validators.maxLength(15)]],
+      duration: [null, [
+        Validators.required,
+        Validators.pattern(/^[0-9]+(?!.)/)
+      ]],
+      date: [null, [Validators.required, Validators.pattern(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)]],
+      author: [null, [Validators.required, this.checkAuthor()]],
+    });
+  }
+
+  get title(): AbstractControl {
+    return this.form.get('title');
+  }
+
+  get description(): AbstractControl {
+    return this.form.get('description');
+  }
+
+  get duration(): AbstractControl {
+    return this.form.get('duration');
+  }
+
+  get date(): AbstractControl {
+    return this.form.get('date');
+  }
+
+  get author(): AbstractControl {
+    return this.form.get('author');
+  }
+
+  private checkAuthor(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const validAuthor: boolean = control.value;
+      return validAuthor ? null : { invalidAuthor: true };
+    };
   }
 
 }

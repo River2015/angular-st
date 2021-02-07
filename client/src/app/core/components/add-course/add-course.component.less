@@ -13,6 +13,17 @@
     border: 2px solid #9b9b9b;
     height: 60px;
     border-radius: 4px;
+    &.error {
+      border: 2px solid #981e06;
+    }
+  }
+  textarea {
+    border: 2px solid #9b9b9b;
+    min-height: 60px;
+    border-radius: 4px;
+    &.error {
+      border: 2px solid #981e06;
+    }
   }
 }
 .study-course {
@@ -67,5 +78,9 @@
     left: 450px;
     font-size: @lg-text-size;
     font-weight: @font-weight-semi;
+  }
+
+  &__error {
+    color: #981e06;
   }
 }
