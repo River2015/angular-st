@@ -53,19 +53,19 @@ export class CoursesEffects {
   );
 
 
-  // @ts-ignore
-  loadSearchCourses$ = createEffect(() => this.actions$
-    .pipe(
-      ofType<LoadSearchCoursesAction>(CoursesActionTypes.LOAD_SEARCH_COURSES),
-      mergeMap(() => this.coursesService.searchCourse(payload)
-        .pipe(
-          map(courses => new LoadCoursesSuccessAction ( courses ),
-            catchError(error => of(new LoadCoursesFailureAction(error)))
-          )
-        )
-      )
-    )
-  );
+  // // @ts-ignore
+  // loadSearchCourses$ = createEffect(() => this.actions$
+  //   .pipe(
+  //     ofType<LoadSearchCoursesAction>(CoursesActionTypes.LOAD_SEARCH_COURSES),
+  //     mergeMap(() => this.coursesService.searchCourse(payload)
+  //       .pipe(
+  //         map(courses => new LoadCoursesSuccessAction ( courses ),
+  //           catchError(error => of(new LoadCoursesFailureAction(error)))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   addCourseItem$ = createEffect(() => this.actions$
     .pipe(

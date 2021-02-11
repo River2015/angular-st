@@ -53,10 +53,10 @@ export class CoursesComponent implements OnInit {
   // TODO: fix search
 
   onSearchPass(searchText: string): any{
-    this.store.dispatch(new LoadSearchCoursesAction(searchText));
-    // this.coursesService.searchCourse(searchText).subscribe(data => {
-    //   this.courses = data;
-    // });
+    // this.store.dispatch(new LoadSearchCoursesAction(searchText));
+    this.coursesService.searchCourse(searchText).subscribe(data => {
+      this.courses = data;
+    });
   }
 
   loadMore(): void {
