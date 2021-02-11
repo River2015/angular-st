@@ -6,6 +6,7 @@ export enum CoursesActionTypes {
   LOAD_COURSES_SUCCESS = '[COURSES] Load Courses Success',
   LOAD_COURSES_FAILURE = '[COURSES] Load Courses Failure',
   LOAD_MORE_COURSES = '[COURSES] Load More Courses',
+  LOAD_SEARCH_COURSES = '[COURSES] Load Search Courses',
   ADD_COURSE = '[COURSES] Add Course',
   ADD_COURSE_SUCCESS = '[COURSES] Add Course Success',
   ADD_COURSE_FAILURE = '[COURSES] Add Course Failure',
@@ -24,6 +25,11 @@ export class LoadCoursesAction implements Action {
 
 export class LoadMoreCoursesAction implements Action {
   readonly type = CoursesActionTypes.LOAD_MORE_COURSES;
+}
+
+export class LoadSearchCoursesAction implements Action {
+  readonly type = CoursesActionTypes.LOAD_SEARCH_COURSES;
+  constructor(public payload: string) {}
 }
 
 export class LoadCoursesSuccessAction implements Action {
@@ -90,5 +96,7 @@ export type CoursesAction = AddCourseAction |
   LoadCoursesSuccessAction |
   EditCourseAction |
   EditCourseSuccessAction |
-  EditCourseFailureAction
+  EditCourseFailureAction |
+  LoadMoreCoursesAction |
+  LoadSearchCoursesAction
 

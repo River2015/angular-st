@@ -71,8 +71,11 @@ export class CoursesService {
   }
 
 
-  searchCourse(textFragment: any): any {
+  searchCourse(textFragment: string): any {
     const api = `${this.endpoint}?textFragment=${textFragment}`;
-    return this.http.get(api, httpOptions);
+    return this.http.get(api, httpOptions)
+      .pipe(
+        delay(500)
+      );
   }
 }

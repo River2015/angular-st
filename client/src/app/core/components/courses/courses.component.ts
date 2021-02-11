@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {IAuthor, ICourse} from '../../models/course';
 import {
   DeleteCourseSuccessAction,
-  LoadCoursesAction, LoadMoreCoursesAction
+  LoadCoursesAction, LoadMoreCoursesAction, LoadSearchCoursesAction
 } from './store/courses.actions';
 
 @Component({
@@ -50,8 +50,13 @@ export class CoursesComponent implements OnInit {
     } else { return; }
   }
 
+  // TODO: fix search
+
   onSearchPass(searchText: string): any{
-    this.courses = this.coursesService.searchCourse(searchText);
+    this.store.dispatch(new LoadSearchCoursesAction(searchText));
+    // this.coursesService.searchCourse(searchText).subscribe(data => {
+    //   this.courses = data;
+    // });
   }
 
   loadMore(): void {
@@ -59,9 +64,7 @@ export class CoursesComponent implements OnInit {
   }
 
   edit(id: number): void {
-    this.coursesService.getCoursesId(id).subscribe((data) => {
-      this.course = data;
-    });
+    this.router.navigateByUrl('courses/edit/${id}');
   }
 
   add(): void {

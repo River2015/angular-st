@@ -17,7 +17,7 @@ import {
   LoadCoursesAction,
   LoadCoursesFailureAction,
   LoadCoursesSuccessAction,
-  DeleteCourseFailureAction, LoadMoreCoursesAction
+  DeleteCourseFailureAction, LoadMoreCoursesAction, LoadSearchCoursesAction
 } from './courses.actions';
 
 
@@ -43,6 +43,21 @@ export class CoursesEffects {
     .pipe(
       ofType<LoadMoreCoursesAction>(CoursesActionTypes.LOAD_MORE_COURSES),
       mergeMap(() => this.coursesService.getCourses(this.load, this.count)
+        .pipe(
+          map(courses => new LoadCoursesSuccessAction ( courses ),
+            catchError(error => of(new LoadCoursesFailureAction(error)))
+          )
+        )
+      )
+    )
+  );
+
+
+  // @ts-ignore
+  loadSearchCourses$ = createEffect(() => this.actions$
+    .pipe(
+      ofType<LoadSearchCoursesAction>(CoursesActionTypes.LOAD_SEARCH_COURSES),
+      mergeMap(() => this.coursesService.searchCourse(payload)
         .pipe(
           map(courses => new LoadCoursesSuccessAction ( courses ),
             catchError(error => of(new LoadCoursesFailureAction(error)))
