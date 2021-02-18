@@ -19,6 +19,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import {RouterModule} from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NotFoundComponent,
     EditCourseComponent,
     SpinnerComponent,
+    AuthorsComponent,
   ],
   exports: [
     HeaderComponent,

@@ -42,16 +42,8 @@
       [ngClass]="{ 'error': date?.invalid && (date?.touched || date?.dirty) }"/>
   </div>
 
-  <div class="study-course__item study-course__item--w400">
-    <label >Author<span>is required</span></label>
-    <span class="study-course__error"  *ngIf="author?.invalid && (author?.touched || author?.dirty)">
-      <span *ngIf="author.errors?.required">Field is required</span>
-      <span *ngIf="author.errors?.invalidAuthor">Fill in at list one author </span>
-    </span>
-    <input
-      formControlName="author"
-      type="text"
-      [ngClass]="{ 'error': author?.invalid && (author?.touched || author?.dirty) }"/>
+  <div class="study-course__item">
+    <study-authors formControlName="author"></study-authors>
   </div>
   <div class="study-course__controls">
     <button (click)="cancel()" class="btn-grey btn-large study-courses__edit-btn">cancel</button>

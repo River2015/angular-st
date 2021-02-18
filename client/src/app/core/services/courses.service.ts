@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
 import {catchError, concatMap, delay, map, retry} from 'rxjs/operators';
 import {ErrorService} from './error.service';
-import {ICourse} from '../models/course';
+import {IAuthor, ICourse} from '../models/course';
 
 
 const httpOptions = {
@@ -17,6 +17,7 @@ const httpOptions = {
 export class CoursesService {
   courses: any = [];
   endpoint = 'http://localhost:3004/courses/';
+  enpointAutors = 'http://localhost:3004/authors';
   constructor(private http: HttpClient, private router: Router, private handleError: ErrorService) { }
 
   getCourses(start?, count?, sort?, textFragment?){
@@ -74,6 +75,14 @@ export class CoursesService {
   searchCourse(textFragment: string): any {
     const api = `${this.endpoint}?textFragment=${textFragment}`;
     return this.http.get(api, httpOptions)
+      .pipe(
+        delay(500)
+      );
+  }
+
+  getAuthors(textFragment?): any{
+    const api = `${this.enpointAutors}?textFragment=${textFragment}`;
+    return this.http.get<IAuthor[]>(api, httpOptions)
       .pipe(
         delay(500)
       );

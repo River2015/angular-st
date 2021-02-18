@@ -82,7 +82,6 @@ export class AddCourseComponent implements OnInit {
 
   private checkAuthor(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      console.log(control.value)
       const validAuthor: boolean = control.value;
       return validAuthor ? null : { invalidAuthor: true };
     };

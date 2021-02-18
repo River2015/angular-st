@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IAuthor, ICourse} from '../../models/course';
+import {IAuthor, ICourseId, ICourse} from '../../models/course';
 import {CoursesService} from '../../services/courses.service';
 import { EditCourseAction, LoadCoursesAction} from '../courses/store/courses.actions';
 import {Store} from '@ngrx/store';
@@ -14,10 +14,15 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, 
   styleUrls: ['./edit-course.component.less']
 })
 export class EditCourseComponent implements OnInit {
-  course: ICourse;
+  course: ICourseId; // for request get by id - anohter author interface
   form: FormGroup;
   value = '';
   id: number;
+  authors: {
+    id: number,
+    name: string,
+    lastname: string,
+  }[];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -30,8 +35,30 @@ export class EditCourseComponent implements OnInit {
     this.id = Number(this.route.snapshot.params.id);
     this.coursesService.getCoursesId(this.id).subscribe((data) => {
       this.course = data;
+      // TODO: get real authors in mothod changeData
+       this.authors = this.changeData(this.course.authors);
     });
     this.createForm();
+
+  }
+
+  changeData(data): any {
+     data.map((item) => {
+       const newItem: IAuthor = {
+         id: 0,
+         name: ''
+       };
+       Object.entries(item).map(([key, value]) => {
+        if (key === 'id') {
+          // @ts-ignore
+          newItem.id = value;
+        } else {
+          // @ts-ignore
+          newItem.name =  newItem.name + ' ' + value;
+          item = newItem;
+        }
+       });
+     });
   }
 
   cancel(): void {
@@ -45,7 +72,7 @@ export class EditCourseComponent implements OnInit {
       description: this.description.value || this.course.description,
       date: this.date.value || this.course.date,
       name: this.title.value || this.course.name,
-      author: [ this.author.value] || this.course.author,
+      author: [ this.author.value] || this.course.authors,
       isTopRated: true,
     };
 
@@ -55,16 +82,13 @@ export class EditCourseComponent implements OnInit {
     };
     this.store.dispatch(new EditCourseAction(payload));
     this.router.navigate(['/courses']);
-    // this.coursesService.updateCourse(this.id, this.editedCourseItem).subscribe(() => {
-    //   this.router.navigate(['/courses']);
-    // });
     this.store.dispatch(new LoadCoursesAction());
   }
 
   private createForm(): void {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(5)]],
-      description: [null, [Validators.required, Validators.maxLength(15)]],
+      title: ['', [Validators.required, Validators.maxLength(50)]],
+      description: [null, [Validators.required, Validators.maxLength(250)]],
       duration: [null, [
         Validators.required,
         Validators.pattern(/^[0-9]+(?!.)/)
