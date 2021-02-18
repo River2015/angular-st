@@ -1,0 +1,88 @@
+@import '../../../../styles/variables';
+.study-author {
+  input {
+    border: 2px solid #9b9b9b;
+    height: 60px;
+    border-radius: 4px;
+    &.error {
+      border: 2px solid #981e06;
+    }
+  }
+  textarea {
+    border: 2px solid #9b9b9b;
+    min-height: 60px;
+    border-radius: 4px;
+    &.error {
+      border: 2px solid #981e06;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  label {
+    font-size: 20px;
+    display: flex;
+  }
+
+  span {
+    margin-left: auto;
+  }
+
+  input {
+    font-size: 20px;
+    width: 100%;
+    min-height: 40px;
+  }
+
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    label {
+      background: @grey;
+      border-radius: 8px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__item--w250 {
+    width: 250px;
+  }
+
+  &__item--w400 {
+    width: 400px;
+  }
+
+  &__title {
+    flex: 1;
+    color: @black;
+    font-size: @lg-text-size;
+    font-weight: @font-weight-semi;
+    display: flex;
+    align-items: center;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 20px;
+    }
+  }
+
+  &__duration {
+    position: absolute;
+    left: 450px;
+    font-size: @lg-text-size;
+    font-weight: @font-weight-semi;
+  }
+
+  &__error {
+    color: #981e06;
+
+  }
+}
