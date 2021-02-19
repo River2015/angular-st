@@ -1,28 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IAuthor, ICourseId, ICourse} from '../../models/course';
+import {ICourseId, ICourse} from '../../models/course';
 import {CoursesService} from '../../services/courses.service';
 import { EditCourseAction, LoadCoursesAction} from '../courses/store/courses.actions';
 import {Store} from '@ngrx/store';
 import {CoursesAppState} from '../../models/courses-state.model';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {map} from 'rxjs/operators';
 
 
 @Component({
   selector: 'study-edit-course',
   templateUrl: './edit-course.component.html',
-  styleUrls: ['./edit-course.component.less']
+  styleUrls: ['./edit-course.component.less'],
 })
 export class EditCourseComponent implements OnInit {
-  course: ICourseId; // for request get by id - anohter author interface
+  course: ICourseId;
   form: FormGroup;
   value = '';
   id: number;
-  authors: {
-    id: number,
-    name: string,
-    lastname: string,
-  }[];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -33,32 +29,26 @@ export class EditCourseComponent implements OnInit {
 
   ngOnInit(): any {
     this.id = Number(this.route.snapshot.params.id);
-    this.coursesService.getCoursesId(this.id).subscribe((data) => {
-      this.course = data;
-      // TODO: get real authors in mothod changeData
-       this.authors = this.changeData(this.course.authors);
+    this.coursesService.getCoursesId(this.id)
+      .pipe(
+        map(data => ({
+          authors: data.authors.map(author =>  ({
+            id: author.id,
+            name: `${author.name} ${author.lastName}`
+          })),
+          date: data.date,
+          description: data.description,
+          id: data.id,
+          isTopRated: data.isTopRated,
+          length: data.length,
+          name: data.name,
+        })),
+      )
+      .subscribe((data) => {
+        this.course = data;
     });
     this.createForm();
 
-  }
-
-  changeData(data): any {
-     data.map((item) => {
-       const newItem: IAuthor = {
-         id: 0,
-         name: ''
-       };
-       Object.entries(item).map(([key, value]) => {
-        if (key === 'id') {
-          // @ts-ignore
-          newItem.id = value;
-        } else {
-          // @ts-ignore
-          newItem.name =  newItem.name + ' ' + value;
-          item = newItem;
-        }
-       });
-     });
   }
 
   cancel(): void {
@@ -72,7 +62,7 @@ export class EditCourseComponent implements OnInit {
       description: this.description.value || this.course.description,
       date: this.date.value || this.course.date,
       name: this.title.value || this.course.name,
-      author: [ this.author.value] || this.course.authors,
+      author:  this.author.value || this.course.authors,
       isTopRated: true,
     };
 

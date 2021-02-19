@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, forwardRef, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ChangeDetectorRef} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
   FormBuilder,
-  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR, ValidationErrors,
   ValidatorFn,
@@ -12,7 +11,7 @@ import {
 import {CoursesService} from '../../services/courses.service';
 import {IAuthor} from '../../models/course';
 import {debounceTime, distinctUntilChanged, filter, switchMap, tap} from 'rxjs/operators';
-import {EMPTY, Subject, Subscription} from 'rxjs';
+import { Subject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'study-authors',
@@ -32,12 +31,13 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor  {
   value: string;
   filteredMovies: any;
   authorsAll: IAuthor[] = [];
+  totalAuthors: IAuthor[];
   term$ = new Subject<any>();
   form: FormGroup;
 
   private searchSubscription: Subscription;
 
-  constructor(private fb: FormBuilder,  private coursesService: CoursesService,) { }
+  constructor(private fb: FormBuilder,  private coursesService: CoursesService, private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.searchSubscription = this.term$.pipe(
@@ -47,8 +47,8 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor  {
       switchMap(value => this.coursesService.getAuthors(value))
     ).subscribe(data => {
       this.filteredMovies = data;
+      this.ref.markForCheck();
     });
-
     this.createForm();
   }
 
@@ -69,9 +69,10 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor  {
     this.onTouched = fn;
   }
   changeAuthor(author): any {
-    this.authorsAll = (this.authorsGet) ? [...this.authorsAll, this.authorsGet, author] : [...this.authorsAll, author];
-    console.log(this.authorsAll);
-    this.onChange(this.authorsAll);
+    this.authorsAll =  [...this.authorsAll, author];
+    this.authorsGet = [...this.authorsGet, author];
+    this.totalAuthors = (this.authorsGet) ? this.authorsGet : this.authorsAll;
+    this.onChange(this.totalAuthors);
   }
 
   onBlur() {
