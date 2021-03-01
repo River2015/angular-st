@@ -1,27 +1,27 @@
 <form class="study-course__form" [formGroup]="form" (ngSubmit)="save()">
-  <h1  class="study-course__title">New course</h1>
+  <h1  class="study-course__title">{{'ADD.T' | translate}}</h1>
   <div class="study-course__item">
-    <label>Title<span>is required</span></label>
+    <label>{{'MODAL.TITLE' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
     <span class="study-course__error"  *ngIf="title?.invalid && (title?.touched || title?.dirty)">
-      <span *ngIf="title.errors?.required">Field is required</span>
-      <span *ngIf="title.errors?.maxlength">Max length 5 symbols </span>
+      <span *ngIf="title.errors?.required">{{'VALIDATION.REQUIRED' | translate}}</span>
+      <span *ngIf="title.errors?.maxlength">{{'VALIDATION.MAX' | translate : {max: maxTitle} }}</span>
     </span>
     <input formControlName="title" type="text" [ngClass]="{ 'error': title?.invalid && (title?.touched || title?.dirty) }"/>
   </div>
   <div class="study-course__item">
-    <label>Description <span>is required</span></label>
+    <label>{{'MODAL.DESCRIPTION' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
     <span class="study-course__error"  *ngIf="description?.invalid && (description?.touched || description?.dirty)">
-      <span *ngIf="description.errors?.required">Field is required</span>
-      <span *ngIf="description.errors?.maxlength">Max length 15 symbols </span>
+      <span *ngIf="description.errors?.required">{{'VALIDATION.REQUIRED' | translate}}</span>
+      <span *ngIf="description.errors?.maxlength">{{'VALIDATION.MAX' | translate : {max: maxDescription} }}</span>
     </span>
     <textarea formControlName="description" [ngClass]="{ 'error': description?.invalid && (description?.touched || description?.dirty) }"></textarea>
   </div>
 
   <div class="study-course__item study-course__item--w250" >
-    <label>Duration<span>is required</span></label>
+    <label>{{'MODAL.DURATION' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
     <span class="study-course__error"  *ngIf="duration?.invalid && (duration?.touched || duration?.dirty)">
-      <span *ngIf="duration.errors?.required">Field is required</span>
-      <span *ngIf="duration.errors?.pattern">Enter only digits </span>
+      <span *ngIf="duration.errors?.required">{{'VALIDATION.REQUIRED' | translate}}</span>
+      <span *ngIf="duration.errors?.pattern">{{'VALIDATION.DIGITS' | translate}}</span>
     </span>
     <input
       formControlName="duration"
@@ -31,10 +31,10 @@
   </div>
 
   <div class="study-course__item study-course__item--w250">
-    <label>Date<span>is required</span></label>
+    <label>{{'MODAL.DATE' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
     <span class="study-course__error"  *ngIf="date?.invalid && (date?.touched || date?.dirty)">
-      <span *ngIf="date.errors?.required">Field is required</span>
-      <span *ngIf="date.errors?.pattern">Enter correct date </span>
+      <span *ngIf="date.errors?.required">{{'VALIDATION.REQUIRED' | translate}}</span>
+      <span *ngIf="date.errors?.pattern">{{'VALIDATION.DATE' | translate}}</span>
     </span>
     <input
       formControlName="date"
@@ -46,8 +46,8 @@
     <study-authors formControlName="author"></study-authors>
   </div>
   <div class="study-course__controls">
-    <button (click)="cancel()" class="btn-grey btn-large study-courses__edit-btn">cancel</button>
-    <button [disabled]="form.invalid" class="btn-green btn-large study-courses__delete-btn">save</button>
+    <button (click)="cancel()" class="btn-grey btn-large study-courses__edit-btn">{{'BUTTONS.CANCEL' | translate | uppercase}}</button>
+    <button [disabled]="form.invalid" class="btn-green btn-large study-courses__delete-btn">{{'BUTTONS.SAVE' | translate | uppercase}}</button>
   </div>
 </form>
 

@@ -18,6 +18,8 @@ export class AddCourseComponent implements OnInit {
   form: FormGroup;
   loading$: Observable<boolean>;
   error$: Observable<Error>;
+  maxTitle = 50;
+  maxDescription = 250;
 
   constructor(private router: Router, private coursesService: CoursesService,
               private store: Store<CoursesAppState>, private fb: FormBuilder) { }
@@ -49,8 +51,8 @@ export class AddCourseComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(5)]],
-      description: [null, [Validators.required, Validators.maxLength(15)]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxTitle)]],
+      description: [null, [Validators.required, Validators.maxLength(this.maxDescription)]],
       duration: [null, [
         Validators.required,
         Validators.pattern(/^[0-9]+(?!.)/)

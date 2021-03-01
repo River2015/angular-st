@@ -20,7 +20,7 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import {RouterModule} from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { AuthorsComponent } from './components/authors/authors.component';
-
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { AuthorsComponent } from './components/authors/authors.component';
     CommonModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule,
   ],
   providers: [ SearchPipe ]
 })

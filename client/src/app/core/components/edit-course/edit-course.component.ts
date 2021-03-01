@@ -19,7 +19,8 @@ export class EditCourseComponent implements OnInit {
   form: FormGroup;
   value = '';
   id: number;
-
+  maxTitle = 50;
+  maxDescription = 250;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private coursesService: CoursesService,
@@ -77,8 +78,8 @@ export class EditCourseComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: [null, [Validators.required, Validators.maxLength(250)]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxTitle)]],
+      description: [null, [Validators.required, Validators.maxLength(this.maxDescription)]],
       duration: [null, [
         Validators.required,
         Validators.pattern(/^[0-9]+(?!.)/)

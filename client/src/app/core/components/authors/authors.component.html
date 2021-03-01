@@ -4,10 +4,10 @@
       {{author.name}}
     </label>
   </div>
-  <label >Author<span>is required</span></label>
+  <label>{{'MODAL.AUTHOR' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
   <span class="study-course__error"  *ngIf="authorsCtrl?.invalid && (authorsCtrl?.touched || authorsCtrl?.dirty)">
-  <span *ngIf="authorsCtrl.errors?.required">Field is required</span>
-  <span *ngIf="authorsCtrl.errors?.invalidAuthor">Fill in at list one author </span>
+  <span *ngIf="authorsCtrl.errors?.required">{{'VALIDATION.REQUIRED' | translate}}</span>
+  <span *ngIf="authorsCtrl.errors?.invalidAuthor">{{'VALIDATION.LENGTH' | translate}}</span>
   </span>
   <input
     formControlName="authors"

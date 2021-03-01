@@ -1,0 +1,52 @@
+{
+  "NF": {
+    "T": "Page's not found"
+  },
+  "HEADER": {
+    "T": "Video courses"
+  },
+  "LOGIN": {
+    "T": "Login",
+    "CREDENTIALS": "login: 'Morales', password: 'id'",
+    "EMAIL": "E-mail",
+    "PASSWOPD": "Password",
+    "FORGOTRAS": "Forgot password"
+  },
+  "FOOTER": {
+    "T": "CopyRight Videocourses. All rights reserved"
+  },
+  "ADD": {
+    "T": "New course"
+  },
+  "MODAL": {
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "DURATION": "Duration",
+    "DATE": "Date",
+    "AUTHOR": "Author"
+  },
+  "COURSES": {
+    "WELLCOME": "no data, feel free to add new course"
+  },
+  "PROFILE": {
+    "LANGUAGE": "select language"
+  },
+  "BUTTONS": {
+    "LOG_OUT": "Log out",
+    "LOGIN": "Login",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "ADD": "Add course",
+    "MORE": "Load more",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SEARCH": "Search"
+  },
+  "VALIDATION": {
+    "REQUIRED": "is required",
+    "DIGITS": "Enter only digits",
+    "MAX": "Max length {{max}} symbols",
+    "DATE": "Enter correct date in format dd-mm-yyyy",
+    "LENGTH": "Fill in at list one author"
+  }
+}

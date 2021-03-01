@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './core/intercepters/auth.interceptor';
 import {SpinnerInterceptor} from './core/intercepters/spinner.interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -17,6 +17,13 @@ import {UserEffects} from './core/components/login/store/user.effects';
 import {CoursesEffects} from './core/components/courses/store/courses.effects';
 import {UserReducer} from './core/components/login/store/user.reducer';
 import {ReactiveFormsModule} from '@angular/forms';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+// tslint:disable-next-line:typedef
+export function HttpLoaderfactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 
 @NgModule({
@@ -28,6 +35,13 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (HttpLoaderfactory),
+        deps: [HttpClient]
+      },
+    }),
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot({ courses: CoursesReducer, user: UserReducer }),
