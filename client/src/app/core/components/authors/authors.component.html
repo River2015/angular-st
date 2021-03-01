@@ -1,0 +1,24 @@
+<form [formGroup]="form" class="study-author">
+  <div class="study-author__chips">
+    <label *ngFor="let author of totalAuthors" (click)="delete(author.id)">
+      {{author.name}}
+    </label>
+  </div>
+  <label >Author<span>is required</span></label>
+  <span class="study-course__error"  *ngIf="authorsCtrl?.invalid && (authorsCtrl?.touched || authorsCtrl?.dirty)">
+  <span *ngIf="authorsCtrl.errors?.required">Field is required</span>
+  <span *ngIf="authorsCtrl.errors?.invalidAuthor">Fill in at list one author </span>
+  </span>
+  <input
+    formControlName="authors"
+    type="text" (keyup)="term$.next(authorsCtrl.value)"
+     [ngClass]="{ 'error': authorsCtrl?.invalid && (authorsCtrl?.touched || authorsCtrl?.dirty) }"
+  />
+
+  <div >
+    <div *ngFor="let author of filteredMovies" (click)="changeAuthor(author)">
+      {{ author?.name }}
+    </div>
+  </div>
+</form>
+

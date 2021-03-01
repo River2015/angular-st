@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-// import {ICourse} from '../models/course';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
-import {catchError, concatMap, map, retry} from 'rxjs/operators';
+import {catchError, concatMap, delay, map, retry} from 'rxjs/operators';
 import {ErrorService} from './error.service';
-import {ICourse} from '../models/course';
+import {IAuthor, ICourse} from '../models/course';
 
 
 const httpOptions = {
@@ -18,14 +17,17 @@ const httpOptions = {
 export class CoursesService {
   courses: any = [];
   endpoint = 'http://localhost:3004/courses/';
+  enpointAutors = 'http://localhost:3004/authors';
   constructor(private http: HttpClient, private router: Router, private handleError: ErrorService) { }
 
-  getCourses(start?, count?, sort?, textFragment?): Observable<any>{
+  getCourses(start?, count?, sort?, textFragment?){
     const api = `${this.endpoint}?start=${start}&count=${count}`;
-    return this.http.get(api, httpOptions).pipe(
-      map((res: Response) => {
-        return res || {};
-      }),
+    return this.http.get<ICourse[]>(api, httpOptions)
+      .pipe(
+        delay(500)
+      // map((res: Response) => {
+      //   return res || {};
+      // }),
      // catchError(this.handleError);
     );
   }
@@ -67,18 +69,22 @@ export class CoursesService {
         concatMap(() => this.getCourses( start, count)),
         // catchError(this.handleError)
       );
-      // .subscribe(
-      //   (course) => {
-      //     console.log(course);
-      //   },
-      //   err => {
-      //     console.log(err);
-      //   });
   }
 
 
-  searchCourse(textFragment: any): any {
+  searchCourse(textFragment: string): any {
     const api = `${this.endpoint}?textFragment=${textFragment}`;
-    return this.http.get(api, httpOptions);
+    return this.http.get(api, httpOptions)
+      .pipe(
+        delay(500)
+      );
+  }
+
+  getAuthors(textFragment?): any{
+    const api = `${this.enpointAutors}?textFragment=${textFragment}`;
+    return this.http.get<IAuthor[]>(api, httpOptions)
+      .pipe(
+        delay(500)
+      );
   }
 }

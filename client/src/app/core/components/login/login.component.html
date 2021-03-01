@@ -1,17 +1,17 @@
-
-<div class="form">
+<h1>login: 'Morales', password: 'id'</h1>
+<form [formGroup]="form" class="form">
   <h2>Login</h2>
   <div class="form__item">
     <label>e-mail<span>is required</span></label>
-    <input type="text" name="name" [ngModel]="name"/>
+    <input type="text" formControlName="login"/>
   </div>
   <div class="form__item">
     <label>password<span>is required</span></label>
-    <input type="password" name="password" [ngModel]="password"/>
+    <input type="password" formControlName="password"/>
   </div>
   <div class="form__item">
     <a>forgot password</a>
     <button (click)="login()">Login</button>
   </div>
 
-</div>
+</form>

@@ -11,7 +11,7 @@ import {CourseBorderDirective} from './directives/course-border.directive';
 import {DurationPipe} from './pipes/duration.pipe';
 import {OrderByPipe} from './pipes/order-by.pipe';
 import {FilterPipe} from './pipes/filter.pipe';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SearchPipe} from './pipes/search.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { AddCourseComponent } from './components/add-course/add-course.component';
@@ -19,6 +19,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import {RouterModule} from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NotFoundComponent,
     EditCourseComponent,
     SpinnerComponent,
+    AuthorsComponent,
   ],
   exports: [
     HeaderComponent,
@@ -51,7 +53,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [ SearchPipe ]
 })

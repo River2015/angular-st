@@ -1,8 +1,10 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {IUser} from '../../models/user';
-import {map, switchMap} from 'rxjs/operators';
+import { Store} from '@ngrx/store';
+import {CoursesAppState} from '../../models/courses-state.model';
+import {GetProfile} from '../login/store/user.actions';
 
 @Component({
   selector: 'study-profile',
@@ -12,24 +14,19 @@ import {map, switchMap} from 'rxjs/operators';
 export class ProfileComponent implements OnInit {
   @HostBinding('class')class = 'study-profile';
   profile;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private store: Store<CoursesAppState>) {
+
+    this.store.subscribe(state =>
+      this.profile = state
+    );
+  }
 
   ngOnInit(): void {
     const token$: Observable<string> = this.authService.getUser();
-    console.log(token$)
-    // this.profile = this.authService.getUserProfile(token$).subscribe()
-
-    console.log(this.profile);
-    this.authService.getUserProfile(token$).subscribe(
-      profile => {
-        this.profile = profile;
-      },
-      err => {
-        console.log(err.error.message);
-      }
-    );
+    this.store.dispatch(new GetProfile(token$));
   }
-  login(): any{
+
+  getInfo(): any{
     console.log(this.authService.getUser());
   }
 }

@@ -1,30 +1,53 @@
-<div class="study-course__form">
+<form class="study-course__form" [formGroup]="form" (ngSubmit)="save()">
   <h1  class="study-course__title">New course</h1>
   <div class="study-course__item">
     <label>Title<span>is required</span></label>
-    <input type="text" (focusout)="focusoutHandlerName($event)"/>
+    <span class="study-course__error"  *ngIf="title?.invalid && (title?.touched || title?.dirty)">
+      <span *ngIf="title.errors?.required">Field is required</span>
+      <span *ngIf="title.errors?.maxlength">Max length 5 symbols </span>
+    </span>
+    <input formControlName="title" type="text" [ngClass]="{ 'error': title?.invalid && (title?.touched || title?.dirty) }"/>
   </div>
   <div class="study-course__item">
     <label>Description <span>is required</span></label>
-    <textarea (focusout)="focusoutHandlerDescription($event)"></textarea>
+    <span class="study-course__error"  *ngIf="description?.invalid && (description?.touched || description?.dirty)">
+      <span *ngIf="description.errors?.required">Field is required</span>
+      <span *ngIf="description.errors?.maxlength">Max length 15 symbols </span>
+    </span>
+    <textarea formControlName="description" [ngClass]="{ 'error': description?.invalid && (description?.touched || description?.dirty) }"></textarea>
   </div>
+
   <div class="study-course__item study-course__item--w250" >
     <label>Duration<span>is required</span></label>
-    <input  type="text" #duration (keyup.enter)="onEnter(duration.value)" (focusout)="focusoutHandlerLength($event)"/>
-    <p *ngIf="value" class="study-course__duration">{{number(value) | duration}}</p>
+    <span class="study-course__error"  *ngIf="duration?.invalid && (duration?.touched || duration?.dirty)">
+      <span *ngIf="duration.errors?.required">Field is required</span>
+      <span *ngIf="duration.errors?.pattern">Enter only digits </span>
+    </span>
+    <input
+      formControlName="duration"
+      type="text"
+      [ngClass]="{ 'error': duration?.invalid && (duration?.touched || duration?.dirty) }"/>
+    <p *ngIf="duration.value" class="study-course__duration">{{number(duration.value) | duration}}</p>
   </div>
 
   <div class="study-course__item study-course__item--w250">
     <label>Date<span>is required</span></label>
-    <input  type="text" (focusout)="focusoutHandlerDate($event)"/>
+    <span class="study-course__error"  *ngIf="date?.invalid && (date?.touched || date?.dirty)">
+      <span *ngIf="date.errors?.required">Field is required</span>
+      <span *ngIf="date.errors?.pattern">Enter correct date </span>
+    </span>
+    <input
+      formControlName="date"
+      type="text"
+      [ngClass]="{ 'error': date?.invalid && (date?.touched || date?.dirty) }"/>
   </div>
-  <div class="study-course__item study-course__item--w400">
-    <label >Author<span>is required</span></label>
-    <input type="text" (focusout)="focusoutHandlerAuthor($event)"/>
+
+  <div class="study-course__item">
+    <study-authors formControlName="author"></study-authors>
   </div>
   <div class="study-course__controls">
     <button (click)="cancel()" class="btn-grey btn-large study-courses__edit-btn">cancel</button>
-    <button (click)="save()" class="btn-green btn-large study-courses__delete-btn">save</button>
+    <button [disabled]="form.invalid" class="btn-green btn-large study-courses__delete-btn">save</button>
   </div>
-</div>
+</form>
 

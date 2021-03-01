@@ -2,13 +2,13 @@
 <div class="study-courses">
   <study-courses-search (searchPass)="onSearchPass($event)" ></study-courses-search>
   <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
-  <div *ngIf="courses; else wellcomeAddMessage">
+  <div *ngIf="courseItems; else wellcomeAddMessage">
     <study-course
       class="study-course"
       [ngClass]="{ 'study-courses--rated': course.isTopRated === true}"
       (courseDelete)="delete($event)"
       (courseEdit)="edit($event)"
-      *ngFor="let course of courses | async "
+      *ngFor="let course of courseItems | async "
       [course]="course"
       appCourseBorder [creation]="course?.date"
     ></study-course>
