@@ -1,23 +1,23 @@
 <router-outlet></router-outlet>
 <div class="study-courses">
   <study-courses-search (searchPass)="onSearchPass($event)" ></study-courses-search>
-  <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">add course</button>
-  <div *ngIf="courses; else wellcomeAddMessage">
+  <button (click)="add()" class="study-courses__add-btn btn-blue btn-large">{{'BUTTONS.ADD' | translate | uppercase}}</button>
+  <div *ngIf="courseItems; else wellcomeAddMessage">
     <study-course
       class="study-course"
       [ngClass]="{ 'study-courses--rated': course.isTopRated === true}"
       (courseDelete)="delete($event)"
       (courseEdit)="edit($event)"
-      *ngFor="let course of courses | async "
+      *ngFor="let course of courseItems | async "
       [course]="course"
       appCourseBorder [creation]="course?.date"
     ></study-course>
-    <button (click)="loadMore()" class="study-courses__more-btn">load more</button>
+    <button (click)="loadMore()" class="study-courses__more-btn">{{'BUTTONS.MORE' | translate | uppercase}}</button>
   </div>
 </div>
 
 <ng-template #wellcomeAddMessage>
-  <div class="study-courses__message">no data, feel free to add new course</div>
+  <div class="study-courses__message">{{'COURSES.WELLCOME' | translate}}</div>
 </ng-template>
 
 

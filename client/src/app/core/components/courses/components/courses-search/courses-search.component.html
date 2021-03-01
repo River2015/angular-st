@@ -1,6 +1,4 @@
-<!--TODO: implement reactive forms instead of div -->
-
-<div class="courses-search__form">
-  <input type="text" [(ngModel)]="searchText"  placeholder="inter text" id="search-box" (keyup)="term$.next(searchText)"/>
-  <button  class="courses-search__search-btn btn-green btn-large">search</button>
-</div>
+<form [formGroup]="form" class="courses-search__form">
+  <input type="text" formControlName="searchText"  placeholder="inter text" id="search-box" (keyup)="term$.next(searchText.value)"/>
+  <button  class="courses-search__search-btn btn-green btn-large">{{'BUTTONS.SEARCH' | translate}}</button>
+</form>

@@ -1,17 +1,16 @@
-
-<div class="form">
-  <h2>Login</h2>
+<h1>{{'LOGIN.CREDENTIALS' | translate}}</h1>
+<form [formGroup]="form" class="form">
+  <h2>{{'LOGIN.T' | translate}}</h2>
   <div class="form__item">
-    <label>e-mail<span>is required</span></label>
-    <input type="text" name="name" [ngModel]="name"/>
+    <label>{{'LOGIN.EMAIL' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
+    <input type="text" formControlName="login"/>
   </div>
   <div class="form__item">
-    <label>password<span>is required</span></label>
-    <input type="password" name="password" [ngModel]="password"/>
+    <label>{{'LOGIN.PASSWORD' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
+    <input type="password" formControlName="password"/>
   </div>
   <div class="form__item">
-    <a>forgot password</a>
-    <button (click)="login()">Login</button>
+    <a>{{'LOGIN.FORGOTPAS' | translate}}</a>
+    <button (click)="login()">{{'BUTTONS.LOGIN' | translate | uppercase}}</button>
   </div>
-
-</div>
+</form>

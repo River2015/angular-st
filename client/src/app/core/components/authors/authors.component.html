@@ -1,0 +1,24 @@
+<form [formGroup]="form" class="study-author">
+  <div class="study-author__chips">
+    <label *ngFor="let author of totalAuthors" (click)="delete(author.id)">
+      {{author.name}}
+    </label>
+  </div>
+  <label>{{'MODAL.AUTHOR' | translate}}<span>{{'VALIDATION.REQUIRED' | translate}}</span></label>
+  <span class="study-course__error"  *ngIf="authorsCtrl?.invalid && (authorsCtrl?.touched || authorsCtrl?.dirty)">
+  <span *ngIf="authorsCtrl.errors?.required">{{'VALIDATION.REQUIRED' | translate}}</span>
+  <span *ngIf="authorsCtrl.errors?.invalidAuthor">{{'VALIDATION.LENGTH' | translate}}</span>
+  </span>
+  <input
+    formControlName="authors"
+    type="text" (keyup)="term$.next(authorsCtrl.value)"
+     [ngClass]="{ 'error': authorsCtrl?.invalid && (authorsCtrl?.touched || authorsCtrl?.dirty) }"
+  />
+
+  <div >
+    <div *ngFor="let author of filteredMovies" (click)="changeAuthor(author)">
+      {{ author?.name }}
+    </div>
+  </div>
+</form>
+

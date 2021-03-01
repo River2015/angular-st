@@ -1,13 +1,20 @@
 <div class="study-header__logo">
-VIDEO COURSE
+{{'HEADER.T' | translate | uppercase}}
 </div>
 <div *ngIf="isAuth" class="study-header__tools">
   <study-profile></study-profile>
   <button class="header__tools-link" (click)='logout()'>
     <img class="header__tools-img" src="../../../../assets/icons/notifications.svg" />
-    log out
+    {{'BUTTONS.LOG_OUT' | translate}}
   </button>
+
 </div>
+<label class="study-header__lang">
+  {{'PROFILE.LANGUAGE' | translate | uppercase}}
+  <select #langSelect (change)="translate.use(langSelect.value)">
+    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+  </select>
+</label>
 <div class="study-header__breadcrumbs-wrapper">
   <study-breadcrumbs *ngIf="isAuth"></study-breadcrumbs>
 </div>

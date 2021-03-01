@@ -1,0 +1,52 @@
+{
+  "NF": {
+    "T": "Página no encontrada"
+  },
+  "HEADER": {
+    "T": "Cursos en video"
+  },
+  "LOGIN": {
+    "T": "Iniciar sesión",
+    "CREDENTIALS": "inicio de sesión: 'Morales', contraseña: 'id'",
+    "EMAIL": "Correo electrónico",
+    "PASSWOPD": "Contraseña",
+    "FORGOTRAS": "Contraseña olvidada"
+  },
+  "FOOTER": {
+    "T": "Videocursos con derechos de autor. Todos los derechos reservados"
+  },
+  "ADD": {
+    "T": "Nuevo curso"
+  },
+  "MODAL": {
+    "TITLE": "Título",
+    "DESCRIPTION": "Descripción",
+    "DURATION": "Duración",
+    "DATE": "Fecha",
+    "AUTHOR": "Autor/Autora"
+  },
+  "COURSES": {
+    "WELLCOME": "sin datos, siéntase libre de agregar un nuevo curso"
+  },
+  "PROFILE": {
+    "LANGUAGE": "seleccione el idioma"
+  },
+  "BUTTONS": {
+    "LOG_OUT": "Cerrar sesión",
+    "LOGIN": "Login",
+    "CANCEL": "Cancelar",
+    "SAVE": "Salvar",
+    "ADD": "Agregar cursos",
+    "MORE": "Cargar más",
+    "EDIT": "Editar",
+    "DELETE": "Borrar",
+    "SEARCH": "Buscar"
+  },
+  "VALIDATION": {
+    "REQUIRED": "es obligatorio",
+    "DIGITS": "Ingrese solo dígitos",
+    "MAX": "Longitud máxima de {{max}} símbolos",
+    "DATE": "Ingrese la fecha correcta en formato dd-mm-aaaa",
+    "LENGTH": "Complete en la lista un autor"
+  }
+}
